@@ -13,9 +13,10 @@
   }
 
   .navbar li {
-    padding-left: 30;
+    
     list-style-type: none;
-
+    /* background-color: white; */
+    padding: 10px;
   }
   .navbar .logo {
     font-weight: bold;
@@ -38,7 +39,7 @@
 
     .navbar a {
     color: #333;
-    text-decoration: none;
+    text-decoration: underline;
     margin-right: 20px;
   }
   .navbar img {
