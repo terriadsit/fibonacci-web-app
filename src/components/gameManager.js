@@ -27,12 +27,14 @@ export default function GameManager({gameType}) {
   const [player2Name, setPlayer2Name] = useState('A.I. Fibi')
 
   useEffect(() => {
+    console.log('beginning useEffect', beginning)
     setPresentNumber(beginning)
     setHistory([])
   }, [beginning])
 
   useEffect(() => {
     const totalRemoved = arraySum(history)
+    console.log('player1Turn useEffect', beginning)
     setPresentNumber(beginning - totalRemoved)
   }, [player1Turn])
 
@@ -113,7 +115,7 @@ export default function GameManager({gameType}) {
 
   
   return (
-    <div>
+    <div className='container'>
          <div>
           {!player1Name && <EnterName setPlayerName={setPlayer1Name} player={'1'}/>}
           {!choseNumber && gameType === 'local' && <EnterName setPlayerName={setPlayer2Name} player={'2'}/>}

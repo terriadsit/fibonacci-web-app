@@ -8,7 +8,7 @@ export default function Home() {
     <div>
       
       home
-     <GameManager gameType={'AI'} />
+     
       
     </div>
     

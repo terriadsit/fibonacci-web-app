@@ -1,7 +1,11 @@
 import React from 'react'
 
+import GameManager from '../components/gameManager'
+
 export default function Localocal() {
   return (
-    <div>Local</div>
+    <div>
+      <GameManager gameType={'local'} />
+    </div>
   )
 }

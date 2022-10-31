@@ -11,7 +11,6 @@ export default function EnterName ({ setPlayerName, player }) {
   function handleSubmit (e) {
     e.preventDefault()
     setPlayerName(tempName)
-    console.log('tempname', tempName)
   }
 
   return (

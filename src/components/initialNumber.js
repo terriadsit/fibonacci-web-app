@@ -26,7 +26,7 @@ export default function InitialNumber({...props}) {
     function handleSubmit(e) {
         e.preventDefault();
         console.log('userChoice', userNumberChoice);
-        initialSticks = tempNumber === initialSticks ? initialSticks : tempNumber;
+        initialSticks = tempNumber;
         if (initialSticks < 2 || initialSticks > 1000) {
             initialSticks = 2;
         };
@@ -53,12 +53,13 @@ export default function InitialNumber({...props}) {
                      value={tempNumber}
                      type="number"
                   />
+                  <button className='btn'>{tempNumber} sticks</button>
                 </form>
                 
-                <p>Or : </p>
+                {/* <p>Or : </p>
                
                 
-                  <button className='btn' onClick={hide}>{initialSticks}</button>
+                  <button className='btn' onClick={hide}>{initialSticks} sticks</button> */}
               
         </div>
     )
