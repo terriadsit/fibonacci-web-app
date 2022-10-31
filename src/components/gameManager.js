@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import DisplaySticks from './displaySticks'
-//import InitialNumber from './initialNumber'
+import InitialNumber from './initialNumber'
 import PlayerChooses from './playerChooses'
 
 import aiTurn from '../shared/aiTurn'
@@ -15,7 +15,7 @@ export default function GameManager({gameType}) {
 
   const [beginning, setBeginning] = useState(tempRandom)
   const [random, setRandom] = useState(tempRandom)
-  const [choseNumber, setChoseNumber] = useState(true) // TODO change back to false
+  const [choseNumber, setChoseNumber] = useState(false) 
   const [presentNumber, setPresentNumber] = useState(0)
   const [player1Turn, setPlayer1Turn] = useState(true)
   const [player1Remove, setPlayer1Remove] = useState(0)
@@ -114,9 +114,9 @@ export default function GameManager({gameType}) {
     <div>
          <div>
           {/* {!player1Name && <EnterName style={styles.enterName} setPlayerName={setPlayer1Name} player={'1'}/>}
-          {!choseNumber && gameType === 'local' && <EnterName setPlayerName={setPlayer2Name} player={'2'}/>}
-
-          {!choseNumber && player1Name && player2Name && <InitialNumber {...initialProps} />} */}
+          {!choseNumber && gameType === 'local' && <EnterName setPlayerName={setPlayer2Name} player={'2'}/>} */}
+        <InitialNumber {...initialProps} />
+          {!choseNumber || player1Name || player2Name && <InitialNumber {...initialProps} />}
 
           {choseNumber && <p>Beginning Game with {beginning} sticks.</p>}
           {choseNumber && <p>Presently there are {presentNumber} sticks.</p>}
@@ -129,7 +129,7 @@ export default function GameManager({gameType}) {
 
           {player1Won && <Text style={globalStyles.text}>{player1Name} won after choosing {player1Remove} sticks!</Text>}
           {player2Won && <Text style={globalStyles.text}>{player2Name} won after choosing {player2Remove} sticks!</Text>} */}
-          {choseNumber || <DisplaySticks howMany={10} />}
+          {choseNumber && <DisplaySticks howMany={10} />}
       </div>
       <button>
         Next Turn
