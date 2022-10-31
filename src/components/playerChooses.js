@@ -44,12 +44,13 @@ export default function PlayerChooses ({ ...props }) {
     //num = e.target.value === NaN ? 0 : e.target.value;
     num = e.target.value.replace(/[^0-9]/g, '');
     //num = parseInt(e.target.value, 10);
-    console.log('in onChange')
+    console.log('in onChange', num)
     setError('')
     setTempRemove(num)
   }
 
-  function handleSubmit () {
+  function handleSubmit(e) {
+    e.preventDefault()
     console.log('tempRemove', tempRemove)
     if (tempRemove < 1 || tempRemove > largest) {
       setError(`Choose a number between 1 and ${largest}`)
@@ -82,6 +83,7 @@ export default function PlayerChooses ({ ...props }) {
               onChange={onChange}
             />
           </label>
+          <button className='btn'>Remove {tempRemove}</button>
         </form>
         {error && <p className='error'>{error}</p>}
       </div>

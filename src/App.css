@@ -6,6 +6,44 @@
   padding: 0 40px;
 }
 
+.btn {
+  
+  margin: 10px;
+  background: rgb(60, 56, 56);
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  
+}
+.btn:hover {
+  color: rgb(249, 242, 242);
+  background-color: rgb(173, 162, 162);
+}
+
+label {
+  display: block;
+  margin: 24px auto;
+}
+label span {
+  display: block;
+  margin-bottom: 6px;
+}
+input, textarea {
+  padding: 8px 6px;
+  font-size: 1em;
+  color: #777;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
 .error {
-  color: crimson;
+  color: red;
+  background: pink;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px 0;
 }

@@ -23,8 +23,9 @@ export default function InitialNumber({...props}) {
         setTempNumber(number);
     }
 
-    function handleSubmit() {
-        console.log('userChoice', userNumberChoice)
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log('userChoice', userNumberChoice);
         initialSticks = tempNumber === initialSticks ? initialSticks : tempNumber;
         if (initialSticks < 2 || initialSticks > 1000) {
             initialSticks = 2;
@@ -57,7 +58,7 @@ export default function InitialNumber({...props}) {
                 <p>Or : </p>
                
                 
-                  <button  onClick={hide}>{initialSticks}</button>
+                  <button className='btn' onClick={hide}>{initialSticks}</button>
               
         </div>
     )

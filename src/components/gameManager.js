@@ -6,7 +6,7 @@ import PlayerChooses from './playerChooses'
 
 import aiTurn from '../shared/aiTurn'
 import arraySum from '../shared/arraySum'
-//import EnterName from './enterName'
+import EnterName from './enterName'
 
 export default function GameManager({gameType}) {
   
@@ -84,6 +84,8 @@ export default function GameManager({gameType}) {
 
 
   function aiTurnEnds () {
+    console.log('inAiTurnEnds',presentNumber, player1Remove);
+
     aiTurn(presentNumber, player1Remove, setHistory, setPlayer2Remove, aiWins)
     setPlayer1Turn(true)
   }
@@ -113,27 +115,27 @@ export default function GameManager({gameType}) {
   return (
     <div>
          <div>
-          {/* {!player1Name && <EnterName style={styles.enterName} setPlayerName={setPlayer1Name} player={'1'}/>}
-          {!choseNumber && gameType === 'local' && <EnterName setPlayerName={setPlayer2Name} player={'2'}/>} */}
-        <InitialNumber {...initialProps} />
-          {!choseNumber || player1Name || player2Name && <InitialNumber {...initialProps} />}
+          {!player1Name && <EnterName setPlayerName={setPlayer1Name} player={'1'}/>}
+          {!choseNumber && gameType === 'local' && <EnterName setPlayerName={setPlayer2Name} player={'2'}/>}
+        
+          {!choseNumber && player1Name && player2Name && <InitialNumber {...initialProps} />}
 
           {choseNumber && <p>Beginning Game with {beginning} sticks.</p>}
           {choseNumber && <p>Presently there are {presentNumber} sticks.</p>}
           {choseNumber && player1Turn && !player2Won && !player1Won && <PlayerChooses {...player1ChoosesProps} />}
-          {/* {choseNumber && gameType !== 'AI' && !player1Turn && !player2Won && !player1Won && <PlayerChooses {...player2ChoosesProps} />}
+          {choseNumber && gameType !== 'AI' && !player1Turn && !player2Won && !player1Won && <PlayerChooses {...player2ChoosesProps} />}
      
           {choseNumber && !player2Won && !player1Won && (
-            <FlatButton text={`Next Turn`} onPress={whichGame} />
+            <button className='btn' onClick={whichGame}>
+               Next Turn
+            </button>
           )}
 
-          {player1Won && <Text style={globalStyles.text}>{player1Name} won after choosing {player1Remove} sticks!</Text>}
-          {player2Won && <Text style={globalStyles.text}>{player2Name} won after choosing {player2Remove} sticks!</Text>} */}
-          {choseNumber && <DisplaySticks howMany={10} />}
+          {player1Won && <p>{player1Name} won after choosing {player1Remove} sticks!</p>}
+          {player2Won && <p>{player2Name} won after choosing {player2Remove} sticks!</p>} 
+          {choseNumber && <DisplaySticks howMany={presentNumber} />}
       </div>
-      <button>
-        Next Turn
-      </button>
+     
     </div>
   )
 }
