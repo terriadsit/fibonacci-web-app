@@ -5,3 +5,7 @@
   flex-grow: 1;
   padding: 0 40px;
 }
+
+.error {
+  color: crimson;
+}

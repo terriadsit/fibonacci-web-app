@@ -1,0 +1,23 @@
+
+
+    .instructions {
+       margin-right: 10px;
+    }
+
+    .chooseNumberContainer {
+      flex: 1;
+      flex-direction: row;
+      padding: 30px;
+      justify-content: space-around;
+      align-items: center
+    }
+
+    input {
+      height: 60;
+      width: 100;
+      margin: 12;
+      border-width: 1;
+      padding: 20;
+      border-radius: 6
+    }
+ 

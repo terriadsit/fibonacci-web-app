@@ -1,13 +1,14 @@
 import React from 'react'
 
-import DisplaySticks from '../components/displaySticks'
+
+import GameManager from '../components/gameManager'
 
 export default function Home() {
   return (
     <div>
       
       home
-     <DisplaySticks howMany={100} />
+     <GameManager gameType={'AI'} />
       
     </div>
     
