@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import socketIOClient from "socket.io-client";
 
 
 // styles and images
@@ -13,7 +15,19 @@ import Home from '../src/pages/home';
 import Local from '../src/pages/local';
 import Online from '../src/pages/online';
 
+const ENDPOINT = "http://127.0.0.1:8000";
+
 function App() {
+  const [response, setResponse] = useState("");
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    socket.on("FromAPI", data => {
+      setResponse(data);
+    });
+    // CLEAN UP THE EFFECT
+    return () => socket.disconnect();
+    //
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
