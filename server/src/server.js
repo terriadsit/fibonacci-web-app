@@ -35,14 +35,23 @@ io.on("connection", (socket) => {
     readyPlayerCount++
     console.log('playercount', readyPlayerCount)
     if (readyPlayerCount % 2 === 0) {
-      fibNamespace.in(room).emit('startGame', socket.id) // 2nd player will be referee, track ball
+      
+      console.log('emit start game room', room, 'id',socket.id)
+      socket.to(room).emit('startGame', socket.id) // 2nd player will be referee, track ball
     }
+  });
+
+  socket.on('next turn', (turnData) => {
+    socket.to(room).emit('next turn', turnData);
+    console.log('in server next turn', turnData);
   })
+
   
   socket.on("disconnect", () => {
     console.log("Client disconnected");
     
   });
+
 });
 
 const getApiAndEmit = socket => {
