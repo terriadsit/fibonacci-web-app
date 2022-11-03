@@ -7,16 +7,17 @@ export default function EnterName ({ setPlayerName, player }) {
     setTempName(e.target.value)
   }
 
-  console.log('in Entername', player)
   function handleSubmit (e) {
     e.preventDefault()
     setPlayerName(tempName)
   }
 
+  const text = player == 0 ? `Enter Player's name` : `Enter Player ${player}'s name`
+
   return (
     <div className='container'>
       <form onSubmit={handleSubmit}>
-        <span> Enter Player {player}'s name:</span>
+        <span>{text}</span>
 
         <div className='inputContainer'>
           <input

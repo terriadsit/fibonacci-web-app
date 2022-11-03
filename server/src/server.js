@@ -37,9 +37,19 @@ io.on("connection", (socket) => {
     if (readyPlayerCount % 2 === 0) {
       
       console.log('emit start game room', room, 'id',socket.id)
-      socket.to(room).emit('startGame', socket.id) // 2nd player will be referee, track ball
+      io.to(room).emit('startGame', socket.id) // 2nd player will be referee, track ball
     }
   });
+
+  socket.on('begin', (beginData) => {
+    console.log('server begindata', beginData);
+    socket.to(room).emit('begin', beginData);
+  });
+
+  socket.on('player2Name', player2Name => {
+    console.log('server player2name', player2Name);
+    socket.to(room).emit('player2Name', player2Name);
+  })
 
   socket.on('next turn', (turnData) => {
     socket.to(room).emit('next turn', turnData);
@@ -62,27 +72,4 @@ const getApiAndEmit = socket => {
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
-// server is running express and socket.io side by side
-// const http = require('http');
-// const io = require('socket.io');
-
-
-// const apiServer = require('./api'); // the express handler
-// const httpServer = http.createServer(apiServer);
-// const socketServer = io(httpServer, {
-//     cors: {
-//       origin: '*',
-//       methods: ['GET', 'POST']
-//     }
-//   });
-
-// const sockets = require('./sockets');
-
-// const PORT = process.env.PORT || 8000;
-
-
-// httpServer.listen(PORT);
-// console.log(`listening on port ${PORT}`);
-
-// sockets.listen(socketServer);
 

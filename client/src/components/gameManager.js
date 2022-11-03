@@ -27,7 +27,6 @@ export default function GameManager({gameType}) {
   const [player2Name, setPlayer2Name] = useState('A.I. Fibi')
 
   useEffect(() => {
-    console.log('beginning useEffect', beginning)
     setPresentNumber(beginning)
     setHistory([])
   }, [beginning])
@@ -113,7 +112,7 @@ export default function GameManager({gameType}) {
 
   }
 
-  
+    
   return (
     <div className='container'>
          <div>
