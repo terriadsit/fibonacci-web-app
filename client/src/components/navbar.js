@@ -16,21 +16,21 @@ export default function Navbar () {
           <span>Fibonacci Nim</span>
         </li>
         <li>
-          <Link to='/directions'>Directions</Link>
+          <Link data-cy="directions" to='/directions'>Directions</Link>
         </li>
 
         <li>
-          <Link to='/'>Home</Link>
+          <Link data-cy="home" to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/againstAI'>Play A.I. Fibi</Link>
+          <Link data-cy="ai" to='/againstAI'>Play A.I. Fibi</Link>
         </li>
 
         <li>
-          <Link to='/local'>2 Players 1 Screen</Link>
+          <Link data-cy="local" to='/local'>2 Players 1 Screen</Link>
         </li>
         <li>
-          <Link to='/online'>Online</Link>
+          <Link data-cy="online" to='/online'>Online</Link>
         </li>
       </ul>
     </div>

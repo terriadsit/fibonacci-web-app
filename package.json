@@ -7,7 +7,8 @@
     "server": "npm run watch --prefix server",
     "client": "npm start --prefix client",
     "watch": "npm run server & npm run client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/terriadsit/fibonacci-web-app/issues"
   },
-  "homepage": "https://github.com/terriadsit/fibonacci-web-app#readme"
+  "homepage": "https://github.com/terriadsit/fibonacci-web-app#readme",
+  "devDependencies": {
+    "cypress": "^10.11.0"
+  }
 }

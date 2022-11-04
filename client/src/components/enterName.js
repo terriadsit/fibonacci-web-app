@@ -21,14 +21,14 @@ export default function EnterName ({ setPlayerName, player }) {
 
         <div className='inputContainer'>
           <input
-            
+            data-cy="playerName"
             onChange={handleChange}
             value={tempName}
             
             placeholder='display name'
           />
         </div>
-        <button className='btn'>Name: {tempName}</button>
+        <button data-cy="name-button" className='btn'>Name: {tempName}</button>
       </form>
     </div>
   )

@@ -127,13 +127,13 @@ export default function GameManager({gameType}) {
           {choseNumber && gameType !== 'AI' && !player1Turn && !player2Won && !player1Won && <PlayerChooses {...player2ChoosesProps} />}
      
           {choseNumber && !player2Won && !player1Won && (
-            <button className='btn' onClick={whichGame}>
+            <button data-cy="next-button" className='btn' onClick={whichGame}>
                Next Turn
             </button>
           )}
 
-          {player1Won && <p>{player1Name} won after choosing {player1Remove} sticks!</p>}
-          {player2Won && <p>{player2Name} won after choosing {player2Remove} sticks!</p>} 
+          {player1Won && <p data-cy="player1-won">{player1Name} won after choosing {player1Remove} sticks!</p>}
+          {player2Won && <p data-cy="player2-won">{player2Name} won after choosing {player2Remove} sticks!</p>} 
           {choseNumber && <DisplaySticks howMany={presentNumber} />}
       </div>
      

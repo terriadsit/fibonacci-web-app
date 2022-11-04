@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 
 import GameManager from '../components/gameManager';
 import EnterName from '../components/enterName';
+import DisplaySticks from '../components/displaySticks';
 
 const ENDPOINT = "http://127.0.0.1:8000";
 const socket = io(ENDPOINT);
@@ -21,6 +22,9 @@ export default function Online() {
   const [startGame, setStartGame] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
   const [beginning, setBeginning] = useState(0);
+  const [player1Turn, setPlayer1Turn] = useState(true);
+
+  const [presentNumber, setPresentNumber] = useState(0);
   
   let playerNumber = 0;
     
@@ -111,7 +115,7 @@ export default function Online() {
       {startGame && <p>{player1Name} is playing {player2Name} starting with {beginning} sticks. {player1Name} begins.</p>}
       {startGame && <p>{player1Name} may remove between 1 and {beginning - 1} sticks.</p>}
       {startGame && <button onClick={handleClick}>Next Turn</button>}
-    
+      {<DisplaySticks howMany={presentNumber} />}
     </div>
   )
 }

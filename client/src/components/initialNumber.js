@@ -48,12 +48,12 @@ export default function InitialNumber({...props}) {
                  <span className='instructions'>Input an initial number of sticks or else press the button to start with {initialSticks} sticks.</span>
                  <input
                      
-                    //  ref={focusRef}
+                     data-cy="sticks"
                      onChange={handleChange}
                      value={tempNumber}
                      type="number"
                   />
-                  <button className='btn'>{tempNumber} sticks</button>
+                  <button data-cy="sticks-button" className='btn'>{tempNumber} sticks</button>
                 </form>
                 
                 {/* <p>Or : </p>

@@ -76,14 +76,14 @@ export default function PlayerChooses ({ ...props }) {
           <label>
             <span className="instructions">{name} may remove between 1 and {largest}</span>
             <input
-              cy-test-id='remove'
+              data-cy='remove'
               required
               type='number'
               value={tempRemove}
               onChange={onChange}
             />
           </label>
-          <button className='btn'>Remove {tempRemove}</button>
+          <button data-cy="remove-button" className='btn'>Remove {tempRemove}</button>
         </form>
         {error && <p className='error'>{error}</p>}
       </div>
