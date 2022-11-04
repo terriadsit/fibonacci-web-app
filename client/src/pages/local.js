@@ -5,7 +5,7 @@ import GameManager from '../components/gameManager'
 export default function Localocal() {
   return (
     <div>
-      <GameManager gameType={'local'} />
+      <GameManager gameType={'local'} name1={''} name2={''} />
     </div>
   )
 }

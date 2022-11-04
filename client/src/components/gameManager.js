@@ -8,7 +8,7 @@ import aiTurn from '../shared/aiTurn'
 import arraySum from '../shared/arraySum'
 import EnterName from './enterName'
 
-export default function GameManager({gameType}) {
+export default function GameManager({gameType, name1, name2}) {
   
   const max = 150
   const tempRandom = Math.floor(Math.random() * max) + 5
@@ -23,13 +23,17 @@ export default function GameManager({gameType}) {
   const [history, setHistory] = useState([])
   const [player1Won, setPlayer1Won] = useState(false)
   const [player2Won, setPlayer2Won] = useState(false)
-  const [player1Name, setPlayer1Name] = useState('')
-  const [player2Name, setPlayer2Name] = useState('A.I. Fibi')
+  const [player1Name, setPlayer1Name] = useState(name1)
+  const [player2Name, setPlayer2Name] = useState(name2)
 
   useEffect(() => {
     setPresentNumber(beginning)
     setHistory([])
   }, [beginning])
+
+  useEffect(() => {
+    beginningSettings()
+  }, [])
 
   useEffect(() => {
     const totalRemoved = arraySum(history)
@@ -90,6 +94,27 @@ export default function GameManager({gameType}) {
     aiTurn(presentNumber, player1Remove, setHistory, setPlayer2Remove, aiWins)
     setPlayer1Turn(true)
   }
+  
+  function beginningSettings() {
+    switch(gameType) {
+      case 'AI': {
+         
+         break;
+       }
+       case 'local': {
+         //setPlayer1Turn(prev => !prev)
+         break;
+       }
+       case 'online': {
+        setChoseNumber(true)
+         console.log('online game in beginning switch')
+         break;
+       }
+       default: {
+         console.log('must be a local, AI or online game')
+       }
+     }
+  }
 
   function whichGame() {
     switch(gameType) {
@@ -112,6 +137,7 @@ export default function GameManager({gameType}) {
 
   }
 
+  
     
   return (
     <div className='container'>
