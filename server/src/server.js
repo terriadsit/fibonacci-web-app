@@ -1,12 +1,15 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
+const api = require("./api")
 
 const port = process.env.PORT || 8000;
-const index = require("./routes/index");
+//const index = require("./routes/index");
+
 
 const app = express();
-app.use(index);
+//app.use(index);
+app.use(api);
 
 const server = http.createServer(app);
 
@@ -64,11 +67,6 @@ io.on("connection", (socket) => {
 
 });
 
-const getApiAndEmit = socket => {
-  const response = new Date();
-  // Emitting a new message. Will be consumed by the client
-  socket.emit("FromAPI", response);
-};
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
