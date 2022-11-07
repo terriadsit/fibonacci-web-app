@@ -35,11 +35,11 @@ export default function GameManager({gameType, name1, name2}) {
   //   beginningSettings()
   // }, [])
 
-  // useEffect(() => {
-  //   const totalRemoved = arraySum(history)
-  //   console.log('player1Turn useEffect', beginning)
-  //   setPresentNumber(beginning - totalRemoved)
-  // }, [player1Turn])
+  useEffect(() => {
+    const totalRemoved = arraySum(history)
+    console.log('player1Turn useEffect', beginning)
+    setPresentNumber(beginning - totalRemoved)
+  }, [player1Turn, beginning, history])
 
   const initialProps = {
     initial: tempRandom,
@@ -95,26 +95,26 @@ export default function GameManager({gameType, name1, name2}) {
     setPlayer1Turn(true)
   }
   
-  function beginningSettings() {
-    switch(gameType) {
-      case 'AI': {
+  // function beginningSettings() {
+  //   switch(gameType) {
+  //     case 'AI': {
          
-         break;
-       }
-       case 'local': {
-         //setPlayer1Turn(prev => !prev)
-         break;
-       }
-       case 'online': {
-        setChoseNumber(true)
-         console.log('online game in beginning switch')
-         break;
-       }
-       default: {
-         console.log('must be a local, AI or online game')
-       }
-     }
-  }
+  //        break;
+  //      }
+  //      case 'local': {
+  //        //setPlayer1Turn(prev => !prev)
+  //        break;
+  //      }
+  //      case 'online': {
+  //       setChoseNumber(true)
+  //        console.log('online game in beginning switch')
+  //        break;
+  //      }
+  //      default: {
+  //        console.log('must be a local, AI or online game')
+  //      }
+  //    }
+  // }
 
   function whichGame() {
     switch(gameType) {

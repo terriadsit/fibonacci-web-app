@@ -33,7 +33,7 @@ export default function Online () {
 
   useEffect(() => {
     socket.on('connect', () => {
-      console.log('connected to socket',isConnected, socket.id)
+      console.log('connected to socket', socket.id)
       setIsConnected(true)
     })
 
@@ -67,7 +67,7 @@ export default function Online () {
 
   useEffect(() => {
     socket.on('startGame', refereeId => {
-      console.log('Referee is', refereeId, 'playerName', playerName, isReferee)
+      console.log('Referee is', refereeId, 'playerName', playerName)
       if (socket.id === refereeId) {
         setIsReferee(true)
         setPlayer1Name(playerName)
@@ -133,6 +133,7 @@ export default function Online () {
     socket.emit('next turn', {})
     setTurnCount(turnCount + 1)
     setPresentNumber(beginning - arraySum(history))
+    console.log(isConnected,isReferee)
   }
 
   return (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 // styles and images
 import './navbar.css'
 import logo from '../assets/logo.png'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 
 export default function Navbar () {
  // const navigate = useNavigate()
