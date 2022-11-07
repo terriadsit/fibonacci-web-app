@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 export default function InitialNumber({...props}) {
 
@@ -9,7 +9,7 @@ export default function InitialNumber({...props}) {
     // },[focusRef])
   
     const [tempNumber, setTempNumber] = useState(props.initial);
-    const [userNumberChoice, setUserNumberChoice] = useState(1);
+    //const [userNumberChoice, setUserNumberChoice] = useState(1);
     let initialSticks = props.initial;
     const setBeginning = props.setBeginning;
     const setChoseNumber = props.setChoseNumber;
@@ -25,7 +25,7 @@ export default function InitialNumber({...props}) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('userChoice', userNumberChoice);
+        console.log('userChoice');
         initialSticks = tempNumber;
         if (initialSticks < 2 || initialSticks > 1000) {
             initialSticks = 2;
@@ -36,11 +36,11 @@ export default function InitialNumber({...props}) {
         setPlayer1Turn(true);
      }
 
-    function hide() {
-        setBeginning(initialSticks);
-        setChoseNumber(true);
-        console.log('in hide', initialSticks)
-    }
+    // function hide() {
+    //     setBeginning(initialSticks);
+    //     setChoseNumber(true);
+    //     console.log('in hide', initialSticks)
+    // }
 
     return (
         <div className="container">

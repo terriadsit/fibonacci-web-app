@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 // styles and images
-import logo from './logo.svg';
+
 import './App.css';
 
 // pages and components

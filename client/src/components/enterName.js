@@ -12,7 +12,7 @@ export default function EnterName ({ setPlayerName, player }) {
     setPlayerName(tempName)
   }
 
-  const text = player == 0 ? `Enter Player's name` : `Enter Player ${player}'s name`
+  const text = player === '0' ? `Enter Player's name` : `Enter Player ${player}'s name`
 
   return (
     <div className='container'>

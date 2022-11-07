@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import socketIOClient from 'socket.io-client'
+
 import io from 'socket.io-client'
 
-import GameManager from '../components/gameManager'
+//import GameManager from '../components/gameManager'
 import EnterName from '../components/enterName'
 import DisplaySticks from '../components/displaySticks'
 import PlayerChooses from '../components/playerChooses'
+import arraySum from '../shared/arraySum'
 
 const ENDPOINT = 'http://127.0.0.1:8000'
 const socket = io(ENDPOINT)
@@ -32,7 +33,7 @@ export default function Online () {
 
   useEffect(() => {
     socket.on('connect', () => {
-      console.log('connected to socket', socket.id)
+      console.log('connected to socket',isConnected, socket.id)
       setIsConnected(true)
     })
 
@@ -66,7 +67,7 @@ export default function Online () {
 
   useEffect(() => {
     socket.on('startGame', refereeId => {
-      console.log('Referee is', refereeId, 'playerName', playerName)
+      console.log('Referee is', refereeId, 'playerName', playerName, isReferee)
       if (socket.id === refereeId) {
         setIsReferee(true)
         setPlayer1Name(playerName)
@@ -131,6 +132,7 @@ export default function Online () {
   function handleClick () {
     socket.emit('next turn', {})
     setTurnCount(turnCount + 1)
+    setPresentNumber(beginning - arraySum(history))
   }
 
   return (
@@ -152,7 +154,7 @@ export default function Online () {
         !player2Won &&
         !player1Won && <PlayerChooses {...player2ChoosesProps} />}
 
-      {/* {player1Turn && startGame && !player2Won && !player1Won && (
+      {player1Turn && startGame && !player2Won && !player1Won && (
         <button data-cy='next-button' className='btn' onClick={handleClick}>
           {player1Name} Turn
         </button>
@@ -160,7 +162,7 @@ export default function Online () {
       {!player1Turn && startGame && !player2Won && !player1Won && (
         <button data-cy='next-button' className='btn' onClick={handleClick}>
           {player2Name} Turn
-        </button>)} */}
+        </button>)}
       
       {player1Won && (
         <p data-cy='player1-won'>

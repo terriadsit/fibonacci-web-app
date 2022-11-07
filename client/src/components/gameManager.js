@@ -14,7 +14,7 @@ export default function GameManager({gameType, name1, name2}) {
   const tempRandom = Math.floor(Math.random() * max) + 5
 
   const [beginning, setBeginning] = useState(tempRandom)
-  const [random, setRandom] = useState(tempRandom)
+  
   const [choseNumber, setChoseNumber] = useState(false) 
   const [presentNumber, setPresentNumber] = useState(0)
   const [player1Turn, setPlayer1Turn] = useState(true)
@@ -31,18 +31,18 @@ export default function GameManager({gameType, name1, name2}) {
     setHistory([])
   }, [beginning])
 
-  useEffect(() => {
-    beginningSettings()
-  }, [])
+  // useEffect(() => {
+  //   beginningSettings()
+  // }, [])
 
-  useEffect(() => {
-    const totalRemoved = arraySum(history)
-    console.log('player1Turn useEffect', beginning)
-    setPresentNumber(beginning - totalRemoved)
-  }, [player1Turn])
+  // useEffect(() => {
+  //   const totalRemoved = arraySum(history)
+  //   console.log('player1Turn useEffect', beginning)
+  //   setPresentNumber(beginning - totalRemoved)
+  // }, [player1Turn])
 
   const initialProps = {
-    initial: random,
+    initial: tempRandom,
     setBeginning: beginning => setBeginning(beginning),
     setChoseNumber: choseNumber => setChoseNumber(choseNumber),
     setPlayer1Turn: player1Turn => setPlayer1Turn(player1Turn)
@@ -72,15 +72,15 @@ export default function GameManager({gameType, name1, name2}) {
     setPlayerWon: player2Won => setPlayer2Won(player2Won)
   }
 
-  function newGame () {
-    setPlayer1Remove(0)
-    setPlayer2Remove(0)
-    setChoseNumber(false)
-    setBeginning(tempRandom)
-    setPlayer2Won(false)
-    setPlayer1Won(false)
-    setPlayer1Turn(true)
-  }
+  // function newGame () {
+  //   setPlayer1Remove(0)
+  //   setPlayer2Remove(0)
+  //   setChoseNumber(false)
+  //   setBeginning(tempRandom)
+  //   setPlayer2Won(false)
+  //   setPlayer1Won(false)
+  //   setPlayer1Turn(true)
+  // }
 
 
   function aiWins () {
