@@ -18,6 +18,7 @@ export default function PlayerChooses ({ ...props }) {
   const history = props.history
   const name = props.name
   const prevName = props.prevName
+  
 
   const removedSoFar = arraySum(history)
 
@@ -61,6 +62,7 @@ export default function PlayerChooses ({ ...props }) {
       setHistory(prev => [...prev, Number(tempRemove)])
       setPlayer1Turn(prev => !prev)
     }
+    
   }
 
   return (

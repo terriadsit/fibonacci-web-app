@@ -32,6 +32,7 @@ export default function Online () {
   const [player2Won, setPlayer2Won] = useState(false)
   const [thisPlayerName, setThisPlayerName] = useState('')
   const [otherPlayerName, setOtherPlayerName] = useState('')
+ 
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -100,7 +101,7 @@ export default function Online () {
       
         
         console.log('in next turn if ')
-        
+        setTurnCount(turnData.tempCount)
         setPlayer2Remove(turnData.player1Remove)
         setPlayer2Won(turnData.player1Won)
         setHistory(prev => [...prev, turnData.player1Remove])
@@ -127,6 +128,10 @@ export default function Online () {
     setPresentNumber(beginning - totalRemoved)
   }, [player1Turn, beginning, history])
 
+  useEffect(() => {
+    handleNext()
+  }, [player1Turn])
+
   const player1ChoosesProps = {
     previousNumber: player2Remove,
     name: thisPlayerName,
@@ -136,39 +141,32 @@ export default function Online () {
     setPlayer1Turn: player1Turn => setPlayer1Turn(player1Turn),
     setPlayerRemove: player1Remove => setPlayer1Remove(player1Remove),
     setHistory: history => setHistory(history),
-    setPlayerWon: player1Won => setPlayer1Won(player1Won)
+    setPlayerWon: player1Won => setPlayer1Won(player1Won),
+    
   }
-
-  const player2ChoosesProps = {
-    previousNumber: player1Remove,
-    name: player2Name,
-    prevName: player1Name,
-    history: history,
-    beginning: beginning,
-    setPlayer1Turn: player1Turn => setPlayer1Turn(player1Turn),
-    setPlayerRemove: player2Remove => setPlayer2Remove(player2Remove),
-    setHistory: history => setHistory(history),
-    setPlayerWon: player2Won => setPlayer2Won(player2Won)
-  }
-
-  function handleClick () {
+  function handleNext () {  
+    let tempCount = turnCount
+    tempCount++
+    setTurnCount(tempCount)
     socket.emit('next turn', {
       history,
       player1Turn,
       player1Remove,
       player2Remove,
       player1Won,
-      player2Won
+      player2Won,
+      tempCount
     })
-    setTurnCount(turnCount + 1)
+
+    
     setPresentNumber(beginning - arraySum(history))
-    console.log('in handleClick online', history, isConnected, isReferee)
+    console.log('in handleClick online', history, 'turn count', turnCount, 'tempCount', tempCount, isConnected, isReferee)
   }
 
   return (
     <div>
       {!playerName && <EnterName setPlayerName={setPlayerName} player={'0'} />}
-      {playerName && <p>Welcome {playerName}</p>}
+      {playerName && <p>Welcome {playerName}! The player who chooses the last stick wins. After the first move, players may remove up to twice as many sticks as the previous remove.</p>}
       {!startGame && <p>Waiting for another player to join...</p>}
       {startGame && (
         <p>
@@ -176,34 +174,13 @@ export default function Online () {
         </p>
       )}
       {startGame && <p>Presently there are {presentNumber} sticks.</p>}
-      {startGame &&  !player2Won && !player1Won && (
-        <fr>
+      {startGame && (turnCount % 2 === 1 && isReferee || turnCount % 2 === 0 && !isReferee) 
+        && !player2Won && !player1Won && 
+        
           <PlayerChooses {...player1ChoosesProps} />
-          <p>
-            player1 {isReferee} player1Turn {player1Turn}
-          </p>
-        </fr>
-      )}
-      {/* {startGame && !isReferee && player1Turn && !player2Won && !player1Won && (
-        <fr>
-          <PlayerChooses {...player2ChoosesProps} />
-          <p>
-            player2 {isReferee} player2Turn {player1Turn}
-          </p>
-        </fr>
-      )} */}
-
-      { startGame && !player2Won && !player1Won && (
-        <button data-cy='next-button' className='btn' onClick={handleClick}>
-          turn done
-        </button>
-      )}
-      {/* {player1Turn && isReferee && startGame && !player2Won && !player1Won && (
-        <button data-cy='next-button' className='btn' onClick={handleClick}>
-          player2 turn done
-        </button> 
-      )}*/}
-
+      
+      }
+      
       {player1Won && (
         <p data-cy='player1-won'>
           {player1Name} won after choosing {player1Remove} sticks!
