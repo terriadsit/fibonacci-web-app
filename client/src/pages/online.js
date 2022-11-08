@@ -174,7 +174,7 @@ export default function Online () {
         </p>
       )}
       {startGame && <p>Presently there are {presentNumber} sticks.</p>}
-      {startGame && (turnCount % 2 === 1 && isReferee || turnCount % 2 === 0 && !isReferee) 
+      {startGame && ((turnCount % 2 === 1 && isReferee) || (turnCount % 2 === 0 && !isReferee)) 
         && !player2Won && !player1Won && 
         
           <PlayerChooses {...player1ChoosesProps} />
