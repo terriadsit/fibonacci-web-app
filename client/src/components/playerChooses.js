@@ -56,7 +56,7 @@ export default function PlayerChooses ({ ...props }) {
       setError(`Choose a number between 1 and ${largest}`)
     } else {
       setError('')
-      setPlayerRemove(tempRemove)
+      setPlayerRemove(Number(tempRemove))
       checkForWin(tempRemove)
       setHistory(prev => [...prev, Number(tempRemove)])
       setPlayer1Turn(prev => !prev)

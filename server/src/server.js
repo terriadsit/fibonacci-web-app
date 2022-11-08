@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
     if (readyPlayerCount % 2 === 0) {
       
       console.log('emit start game room', room, 'id',socket.id)
-      io.to(room).emit('startGame', socket.id) // 2nd player will be referee, track ball
+      io.to(room).emit('startGame', socket.id) // 2nd player will be referee
     }
   });
 
@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on('next turn', (turnData) => {
-    socket.to(room).emit('next turn', turnData);
+    socket.to(room).emit('next turn', turnData, socket.id);
     console.log('in server next turn', turnData);
   })
 
