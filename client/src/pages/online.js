@@ -170,25 +170,28 @@ export default function Online () {
       {!startGame && <p>Waiting for another player to join...</p>}
       {startGame && (
         <p>
-          {player1Name} is playing {player2Name}. {player1Name} begins.
+          {thisPlayerName} is playing {otherPlayerName}. {player1Name} begins.
         </p>
       )}
       {startGame && <p>Presently there are {presentNumber} sticks.</p>}
       {startGame && ((turnCount % 2 === 1 && isReferee) || (turnCount % 2 === 0 && !isReferee)) 
         && !player2Won && !player1Won && 
-        
           <PlayerChooses {...player1ChoosesProps} />
-      
+      }
+
+      {startGame && ((turnCount % 2 === 0 && isReferee) || (turnCount % 2 === 1 && !isReferee)) 
+        && !player2Won && !player1Won && 
+        <p>Waiting for {otherPlayerName}...</p>
       }
       
       {player1Won && (
         <p data-cy='player1-won'>
-          {player1Name} won after choosing {player1Remove} sticks!
+          {thisPlayerName} won after choosing {player1Remove} sticks!
         </p>
       )}
       {player2Won && (
         <p data-cy='player2-won'>
-          {player2Name} won after choosing {player2Remove} sticks!
+          {otherPlayerName} won after choosing {player2Remove} sticks!
         </p>
       )}
       {startGame && <DisplaySticks howMany={presentNumber} />}
