@@ -7,6 +7,7 @@ import PlayerChooses from './playerChooses'
 import aiTurn from '../shared/aiTurn'
 import arraySum from '../shared/arraySum'
 import EnterName from './enterName'
+import Directions from './directions'
 
 export default function GameManager({gameType, name1, name2}) {
   
@@ -146,7 +147,7 @@ export default function GameManager({gameType, name1, name2}) {
           {!choseNumber && gameType === 'local' && <EnterName setPlayerName={setPlayer2Name} player={'2'}/>}
         
           {!choseNumber && player1Name && player2Name && <InitialNumber {...initialProps} />}
-
+          {choseNumber && <Directions />}
           {choseNumber && <p>Beginning Game with {beginning} sticks.</p>}
           {choseNumber && <p>Presently there are {presentNumber} sticks.</p>}
           {choseNumber && player1Turn && !player2Won && !player1Won && <PlayerChooses {...player1ChoosesProps} />}

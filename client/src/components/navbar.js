@@ -15,9 +15,7 @@ export default function Navbar () {
           <img src={logo} alt='logo' />
           <span>Fibonacci Nim</span>
         </li>
-        <li>
-          <Link data-cy="directions" to='/directions'>Directions</Link>
-        </li>
+        
 
         <li>
           <Link data-cy="home" to='/'>Home</Link>

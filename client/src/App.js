@@ -9,7 +9,6 @@ import './App.css';
 // pages and components
 import Navbar from './components/navbar';
 import AgainstAI from '../src/pages/againstAI';
-import Directions from '../src/pages/directions';
 import Home from '../src/pages/home';
 import Local from '../src/pages/local';
 import Online from '../src/pages/online';
@@ -24,10 +23,6 @@ function App() {
         <div className="container">
            <Navbar />
            <Routes>
-             <Route 
-               path="/directions" 
-               element={<Directions />} 
-             />
              <Route 
                path="/" 
                element={<Home />} 
