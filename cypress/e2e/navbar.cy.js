@@ -6,9 +6,6 @@ describe('NavBar appears and operates correctly', () => {
   
   it('links to each page', () => {
    
-    cy.get('[data-cy="directions"]').click();
-    cy.url().should('include', '/directions');
-
     cy.get('[data-cy="ai"]').click();
     cy.url().should('include', 'AI');
 
