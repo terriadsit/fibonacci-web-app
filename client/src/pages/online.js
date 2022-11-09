@@ -8,6 +8,7 @@ import EnterName from '../components/enterName'
 import DisplaySticks from '../components/displaySticks'
 import PlayerChooses from '../components/playerChooses'
 import arraySum from '../shared/arraySum'
+import Directions from '../components/directions'
 
 const ENDPOINT = 'http://127.0.0.1:8000'
 const socket = io(ENDPOINT)
@@ -17,6 +18,7 @@ export default function Online () {
 
   const [playerName, setPlayerName] = useState('')
   const [player1Name, setPlayer1Name] = useState('')
+  // eslint-disable-next-line
   const [player2Name, setPlayer2Name] = useState('')
   const [isReferee, setIsReferee] = useState(false)
   const [startGame, setStartGame] = useState(false)
@@ -130,6 +132,7 @@ export default function Online () {
 
   useEffect(() => {
     handleNext()
+    // eslint-disable-next-line
   }, [player1Turn])
 
   const player1ChoosesProps = {
@@ -164,9 +167,10 @@ export default function Online () {
   }
 
   return (
-    <div>
+    <div className="container">
       {!playerName && <EnterName setPlayerName={setPlayerName} player={'0'} />}
-      {playerName && <p>Welcome {playerName}! The player who chooses the last stick wins. After the first move, players may remove up to twice as many sticks as the previous remove.</p>}
+      {playerName && <p>Welcome {playerName}!</p>}
+      {playerName && <Directions />}
       {!startGame && <p>Waiting for another player to join...</p>}
       {startGame && (
         <p>
