@@ -7,20 +7,39 @@ io.on("connection", (socket) => {
   console.log("New client connected", socket.id);
 
   let room = 'room' + Math.floor(readyPlayerCount / 2) // create rooms for sets of 2 players
-    
-  socket.on('ready', () => {
-     
-    socket.join(room);
 
-    console.log('player ready', socket.id, room)
-    readyPlayerCount++
-    console.log('playercount', readyPlayerCount)
-    if (readyPlayerCount % 2 === 0) {
+  // clientActions allows Cypress tests
+  const clientActions = {
+    onReady() {
+      socket.join(room);
+
+      console.log('player ready', socket.id, room)
+      readyPlayerCount++
+      console.log('playercount', readyPlayerCount)
+      if (readyPlayerCount % 2 === 0) {
       
-      console.log('emit start game room', room, 'id',socket.id)
-      io.to(room).emit('startGame', socket.id) // 2nd player will be referee
-    }
-  });
+        console.log('emit start game room', room, 'id',socket.id)
+        io.to(room).emit('startGame', socket.id) // 2nd player will be referee
+      }
+    },
+    isOnline(username) {
+      $('#messages').append($('<li>').html(username))
+    },
+  }
+    
+   socket.on('ready', clientActions.onReady)     //() => {
+     
+  //   socket.join(room);
+
+  //   console.log('player ready', socket.id, room)
+  //   readyPlayerCount++
+  //   console.log('playercount', readyPlayerCount)
+  //   if (readyPlayerCount % 2 === 0) {
+      
+  //     console.log('emit start game room', room, 'id',socket.id)
+  //     io.to(room).emit('startGame', socket.id) // 2nd player will be referee
+  //   }
+  // });
 
   socket.on('begin', (beginData) => {
     console.log('server begindata', beginData);

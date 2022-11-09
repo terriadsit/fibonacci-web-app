@@ -169,7 +169,7 @@ export default function Online () {
   return (
     <div className="container">
       {!playerName && <EnterName setPlayerName={setPlayerName} player={'0'} />}
-      {playerName && <p>Welcome {playerName}!</p>}
+      {playerName && <p data-cy="welcome">Welcome {playerName}!</p>}
       {playerName && <Directions />}
       {!startGame && <p>Waiting for another player to join...</p>}
       {startGame && (
