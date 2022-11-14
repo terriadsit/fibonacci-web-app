@@ -7,6 +7,10 @@ export default function Home() {
   return (
     <div className='container'>
       <h2>Welcome! </h2>
+      <p>Here is your secret: 
+        <a href="/secret">Show me!</a>
+       
+      </p>
       <p>Login to save stats or continue as a guest.</p>
       <Directions />
       <DisplaySticks howMany={display}/>

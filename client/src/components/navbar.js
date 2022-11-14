@@ -18,7 +18,9 @@ export default function Navbar () {
         <li>
           <Link data-cy="login" to='/login'>Login</Link>
         </li>
-
+        <li>
+          <Link data-cy="logout" to='/auth/logout'>Sign out</Link>
+        </li>
         <li>
           <Link data-cy="home" to='/'>Home</Link>
         </li>

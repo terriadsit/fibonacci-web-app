@@ -26,5 +26,11 @@
   "homepage": "https://github.com/terriadsit/fibonacci-web-app#readme",
   "devDependencies": {
     "cypress": "^10.11.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "helmet": "^6.0.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0"
   }
 }

@@ -10,7 +10,7 @@ import PlayerChooses from '../components/playerChooses'
 import arraySum from '../shared/arraySum'
 import Directions from '../components/directions'
 
-const ENDPOINT = 'http://127.0.0.1:8000'
+const ENDPOINT = 'https://127.0.0.1:8000'
 const socket = io(ENDPOINT)
 
 export default function Online () {
@@ -34,6 +34,8 @@ export default function Online () {
   const [player2Won, setPlayer2Won] = useState(false)
   const [thisPlayerName, setThisPlayerName] = useState('')
   const [otherPlayerName, setOtherPlayerName] = useState('')
+
+  
  
 
   useEffect(() => {

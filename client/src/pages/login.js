@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function Login() {
   return (
-    <div>login</div>
+    <div className='container'>
+      <a href="/auth/google">Google login</a>
+    </div>
   )
 }
