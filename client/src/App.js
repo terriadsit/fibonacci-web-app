@@ -12,7 +12,8 @@ import AgainstAI from '../src/pages/againstAI';
 import Home from '../src/pages/home';
 import Local from '../src/pages/local';
 import Online from '../src/pages/online';
-import Login from './pages/login';
+
+
 
 
 function App() {
@@ -27,10 +28,6 @@ function App() {
              <Route 
                path="/" 
                element={<Home />} 
-             />
-             <Route 
-               path="/login" 
-               element={<Login />} 
              />
              <Route 
                path="/againstAI" 

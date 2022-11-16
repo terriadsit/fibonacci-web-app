@@ -16,10 +16,14 @@ export default function Navbar () {
           <span>Fibonacci Nim</span>
         </li>
         <li>
-          <Link data-cy="login" to='/login'>Login</Link>
+          <a href="/auth/google">
+            <button className='btn'>Google Login</button>
+          </a>
         </li>
         <li>
-          <Link data-cy="logout" to='/auth/logout'>Sign out</Link>
+          <a href="/auth/logout">
+            <button className='btn'>Google Logout</button>
+          </a>
         </li>
         <li>
           <Link data-cy="home" to='/'>Home</Link>
