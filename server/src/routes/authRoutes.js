@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const authRouter = express.Router();
+const { getName } = require('../controllers/authController')
 
 function checkLoggedIn(req, res, next) {  //req.user set up by serializeUser
   const isLoggedIn = req.isAuthenticated() && req.user; // isAuthenticated set by passport 
@@ -38,12 +39,7 @@ authRouter.get('/logout', (req, res) => {
   return res.redirect('/')
 });
 
-authRouter.get('/secret', checkLoggedIn, (req, res) => {
-  console.log('in secret path')
-    return res.status(200).json({
-        id: req.user.id, name: req.user.name
-    })
-});
+authRouter.get('/getName', checkLoggedIn, getName);
 
 authRouter.get('/displayName', (req, res, next) => {
     const isLoggedIn = req.isAuthenticated() && req.user; // isAuthenticated set by passport 
