@@ -7,6 +7,10 @@ import logo from '../assets/logo.png'
 
 export default function Navbar () {
  // const navigate = useNavigate()
+ const handleLogin = () => {
+    
+
+ }
 
   return (
     <div className='navbar'>
@@ -16,8 +20,8 @@ export default function Navbar () {
           <span>Fibonacci Nim</span>
         </li>
         <li>
-          <a href="/auth/google">
-            <button className='btn'>Google Login</button>
+          <a href='/auth/google'>
+            <button className='btn' onClick={handleLogin}>Google Login</button>
           </a>
         </li>
         <li>

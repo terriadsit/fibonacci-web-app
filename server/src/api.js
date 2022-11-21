@@ -6,11 +6,7 @@ const express = require('express');
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20')
 const cookieSession = require('cookie-session');
-
-const { Cookies } = require('universal-cookie');
-
-const cookiesMiddleware = require('universal-cookie-express');
-
+const authRouter = require('./routes/authRoutes')
 
 // save the session to the cookie
 //serializing means saving our user data to a cookie that's going to be passed around to our users
@@ -64,59 +60,16 @@ api.use(cookieSession({
 
 api.use(passport.initialize());  // manage authentication, sets up session
 api.use(passport.session()); // uses keys to validate session, allows serializeUser to be called, sets req.user
-//api.use(cookiesMiddleware());
-//api.use(function(req, res) {
-    //const cookies = new Cookies(req.headers.cookie);
-    //console.log(cookies.get('session'), 'cookies get');
-    //get the user cookies using universal-cookie
-    //console.log('cookies middleware', req.user)
- //  req.universalCookies.get('session')
- //});
+
 api.use(cors({
     origin: 'http://localhost:3000',
 }));
 
-function checkLoggedIn(req, res, next) {  //req.user set up by serializeUser
-    const isLoggedIn = req.isAuthenticated() && req.user; // isAuthenticated set by passport 
-    if (!isLoggedIn) {
-        return res.status(200).json({
-            error: 'You must log in!',
-        })
-    }
-    next();
-}
+
 
 api.use(express.static(path.join(__dirname,"..", "public")));
 
-api.get('/auth/google', 
-    passport.authenticate('google', {
-        scope: ['email', 'profile']
-    })
-);
-
-api.get('/auth/google/callback', 
-  passport.authenticate('google', {
-    failureRedirect: '/failure',
-    successRedirect: '/',
-    session: true,          // save the session
-  }), 
-  (req, res) => {
-      console.log('Google called us back!')
-  }
-);
-
-api.get('/failure', (req, res) => {
-    return res.send('Failed to log in!')
-})
-
-api.get('/auth/logout', (req, res) => {
-  req.logout();  // Removes req.user and clears any logged in session
-  return res.redirect('/')
-});
-
-api.get('/secret', checkLoggedIn, (req, res) => {
-    return res.send('Your personal secret value is 42!')
-});
+api.use('/auth', authRouter)
 
 // Send routes other than those above through Client index.html in public build
 api.get('/*', (req, res) => {
