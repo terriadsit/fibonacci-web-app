@@ -6,7 +6,7 @@ const express = require('express');
 const passport = require('passport');
 const { Strategy } = require('passport-google-oauth20')
 const cookieSession = require('cookie-session');
-const authRouter = require('./routes/authRoutes')
+const authRouter = require('./routes/authRoutes');
 
 // save the session to the cookie
 //serializing means saving our user data to a cookie that's going to be passed around to our users
@@ -66,10 +66,11 @@ api.use(cors({
 }));
 
 
-
+// Routes
 api.use(express.static(path.join(__dirname,"..", "public")));
 
-api.use('/auth', authRouter)
+api.use('/auth', authRouter);
+
 
 // Send routes other than those above through Client index.html in public build
 api.get('/*', (req, res) => {

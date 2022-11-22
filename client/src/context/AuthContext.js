@@ -30,9 +30,7 @@ export const AuthContextProvider = ({ children }) => {
         const fetchUser = async () => {
           const response = await fetch(`/auth/getName`)
           const json = await response.json()
-          console.log('json', json)
           if (response.ok) {
-            console.log('response is OK')
             // keep local state in sync with db
             if (!json.error){
               dispatch({type: 'LOGIN', payload: json})

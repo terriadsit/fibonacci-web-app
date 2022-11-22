@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useAuthContext } from '../hooks/useAuthContext'
+
 
 // styles and images
 import './navbar.css'
@@ -7,7 +7,7 @@ import logo from '../assets/logo.png'
 //import { useNavigate } from 'react-router-dom'
 
 export default function Navbar () {
- const { user } = useAuthContext()
+ 
  const handleLogin = () => {
     
 
@@ -30,7 +30,7 @@ export default function Navbar () {
             <button className='btn'>Google Logout</button>
           </a>
         </li>
-        {user ? <p>Welcome {user.name} </p> : ''}
+        
         <li>
           <Link data-cy="home" to='/'>Home</Link>
         </li>

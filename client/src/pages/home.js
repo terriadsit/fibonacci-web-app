@@ -1,23 +1,15 @@
 import React from 'react'
 import Directions from '../components/directions'
 import DisplaySticks from '../components/displaySticks'
-//import { useCookies } from 'react-cookie';
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export default function Home() {
-  //const [cookies, setCookie] = useCookies(['user']);
-
-  // function onChange(newName) {
-  //   setCookie('user', newName, { path: '/' });
-  // }
+  const { user } = useAuthContext()
   
   const display = 100
   return (
     <div className='container'>
-      <h2>Welcome! </h2>
-      <p>Here is your secret: 
-        <a href="/secret">Show me!</a>
-       
-      </p>
+      {user ? <h2>Welcome {user.name}! </h2> : <h2>Welcome!</h2>}
       <p>Login with Google using the button above to save stats or continue as a guest.</p>
       <Directions />
       <DisplaySticks howMany={display}/>
