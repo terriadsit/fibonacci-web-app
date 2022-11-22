@@ -27,12 +27,13 @@ export default function InitialNumber({...props}) {
         setChoseNumber(true);
         console.log('onEndit intialSticks', initialSticks);
         setPlayer1Turn(true);
+        setTempNumber(initialSticks)
      }
 
     return (
         <div className="container">
             <form className="choiceContainer" onSubmit={handleSubmit}>
-                 <span className='instructions'>Input an initial number of sticks or else press the button to start with {initialSticks} sticks.</span>
+                 <span className='instructions'>Input an initial number of sticks or else press the button to start with {tempNumber} sticks.</span>
                  <input
                      
                      data-cy="sticks"
@@ -42,12 +43,7 @@ export default function InitialNumber({...props}) {
                   />
                   <button data-cy="sticks-button" className='btn'>{tempNumber} sticks</button>
                 </form>
-                
-                {/* <p>Or : </p>
-               
-                
-                  <button className='btn' onClick={hide}>{initialSticks} sticks</button> */}
-              
+                             
         </div>
     )
 }

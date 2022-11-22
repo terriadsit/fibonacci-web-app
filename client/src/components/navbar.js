@@ -18,7 +18,7 @@ export default function Navbar () {
       <ul>
         <li className='logo'>
           <img src={logo} alt='logo' />
-          <span>Fibonacci Nim</span>
+          <h1>Fibonacci Nim</h1>
         </li>
         <li>
           <a href='/auth/google'>

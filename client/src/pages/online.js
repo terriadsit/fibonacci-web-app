@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 import io from 'socket.io-client'
 
@@ -33,6 +34,15 @@ export default function Online () {
   const [player2Won, setPlayer2Won] = useState(false)
   const [thisPlayerName, setThisPlayerName] = useState('')
   const [otherPlayerName, setOtherPlayerName] = useState('')
+
+  const { user } = useAuthContext()
+
+  useEffect(() => {
+    if (user) {
+      
+      setPlayerName(user.name)
+    }
+  })
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -167,7 +177,7 @@ export default function Online () {
   return (
     <div className="container">
       {!playerName && <EnterName setPlayerName={setPlayerName} player={'0'} />}
-      {playerName && <p data-cy="welcome">Welcome {playerName}!</p>}
+      
       {playerName && <Directions />}
       {!startGame && <p>Waiting for another player to join...</p>}
       {startGame && (

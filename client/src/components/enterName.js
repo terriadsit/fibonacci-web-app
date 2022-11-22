@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export default function EnterName ({ setPlayerName, player }) {
+  const { user, dispatch } = useAuthContext()
   const [tempName, setTempName] = useState('')
 
   function handleChange(e) {
@@ -10,6 +12,7 @@ export default function EnterName ({ setPlayerName, player }) {
   function handleSubmit (e) {
     e.preventDefault()
     setPlayerName(tempName)
+    dispatch({type: "LOGIN", payload: {id: '', name: tempName}})
   }
 
   const text = player === '0' ? `Enter Player's name` : `Enter Player ${player}'s name`
