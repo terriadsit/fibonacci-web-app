@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 
 export default function InitialNumber({...props}) {
-
-    // const focusRef = useRef()
-
-    // useEffect(() => {     
-    //   if (focusRef.current) focusRef.current.focus()
-    // },[focusRef])
   
     const [tempNumber, setTempNumber] = useState(props.initial);
-    //const [userNumberChoice, setUserNumberChoice] = useState(1);
     let initialSticks = props.initial;
     const setBeginning = props.setBeginning;
     const setChoseNumber = props.setChoseNumber;
@@ -35,12 +28,6 @@ export default function InitialNumber({...props}) {
         console.log('onEndit intialSticks', initialSticks);
         setPlayer1Turn(true);
      }
-
-    // function hide() {
-    //     setBeginning(initialSticks);
-    //     setChoseNumber(true);
-    //     console.log('in hide', initialSticks)
-    // }
 
     return (
         <div className="container">
