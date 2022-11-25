@@ -42,7 +42,7 @@ export default function Online () {
       
       setPlayerName(user.name)
     }
-  })
+  },[user])
 
   useEffect(() => {
     socket.on('connect', () => {

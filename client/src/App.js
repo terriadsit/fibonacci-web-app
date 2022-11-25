@@ -13,6 +13,7 @@ import Home from '../src/pages/home';
 import Local from '../src/pages/local';
 import Online from '../src/pages/online';
 import Welcome from './components/welcome';
+import Statistics from './pages/statistics';
 
 function App() {
   
@@ -39,6 +40,10 @@ function App() {
              <Route 
                path="/online" 
                element={<Online />} 
+             />
+             <Route 
+               path="/statistics" 
+               element={<Statistics />} 
              />
              
           </Routes>

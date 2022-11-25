@@ -1,0 +1,37 @@
+const mongoose = require('mongoose')
+
+const Schema = mongoose.Schema
+
+const statSchema = new Schema({
+    googleId: {
+        type: String,
+        required: true
+    },
+    aiWins: {
+        type: Number,
+        required: true
+    },
+    aiLosses: {
+        type: Number,
+        required: true
+    },
+    localWins: {
+        type: Number,
+        required: true
+    },
+    localLosses: {
+        type: Number,
+        required: true
+    },
+    onlineWins: {
+        type: Number,
+        required: true
+    },
+    onlineLosses: {
+        type: Number,
+        required: true
+    },
+  
+}, { timestamps: true })
+
+module.exports = mongoose.model('Stat', statSchema)  

@@ -1,17 +1,13 @@
 import { Link } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 
 // styles and images
 import './navbar.css'
 import logo from '../assets/logo.png'
-//import { useNavigate } from 'react-router-dom'
 
 export default function Navbar () {
- 
- const handleLogin = () => {
-    
-
- }
+  const { user } = useAuthContext()
 
   return (
     <div className='navbar'>
@@ -20,17 +16,9 @@ export default function Navbar () {
           <img src={logo} alt='logo' />
           <h1>Fibonacci Nim</h1>
         </li>
-        <li>
-          <a href='/auth/google'>
-            <button className='btn' onClick={handleLogin}>Google Login</button>
-          </a>
-        </li>
-        <li>
-          <a href="/auth/logout">
-            <button className='btn'>Google Logout</button>
-          </a>
-        </li>
-        
+        {user ? <li> <a href="/auth/logout"> <button className='btn'>Google Logout</button> </a> </li> :
+                <li> <a href='/auth/google'> <button className='btn'>Google Login</button> </a> </li>
+        }
         <li>
           <Link data-cy="home" to='/'>Home</Link>
         </li>
@@ -43,6 +31,9 @@ export default function Navbar () {
         </li>
         <li>
           <Link data-cy="online" to='/online'>Online</Link>
+        </li>
+        <li>
+          <Link data-cy="statistics" to='/statistics'>Statistics</Link>
         </li>
       </ul>
     </div>

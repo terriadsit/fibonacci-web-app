@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
 const http = require("https");  // change https to http and sockets work in online page
 const io = require('socket.io'); // also change ENDPOINT in client/online.js to http
 
@@ -22,10 +23,20 @@ const socketServer = io(httpServer, {
 });
 
 const sockets = require('./sockets')
-
-httpServer.listen(port);
-console.log(`listening on port ${port}`)
-
 sockets.listen(socketServer);
+
+// connect to db
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    // listen for requests
+    httpServer.listen(port);
+    console.log(`listening on port ${port}`)      
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
+
+
 
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 export default function EnterName ({ setPlayerName, player }) {
-  const { user, dispatch } = useAuthContext()
+  const { dispatch } = useAuthContext()
   const [tempName, setTempName] = useState('')
 
   function handleChange(e) {

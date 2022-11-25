@@ -41,23 +41,4 @@ authRouter.get('/logout', (req, res) => {
 
 authRouter.get('/getName', checkLoggedIn, getName);
 
-authRouter.get('/displayName', (req, res, next) => {
-    const isLoggedIn = req.isAuthenticated() && req.user; // isAuthenticated set by passport 
-    //const { id, name } = req.user
-    if (!isLoggedIn) {
-        return res.status(200).json({
-            error: 'You must log in!',
-        })
-    } else {
-        console.log('in auth/displayname esle', req.user)
-        return res.status(200).json({
-           message: 'in auth/displayname'
-        })
-    }
-    next();
-})
-
-
-
-
 module.exports = authRouter;
