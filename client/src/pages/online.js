@@ -15,10 +15,10 @@ const socket = io()
 export default function Online () {
   const [isConnected, setIsConnected] = useState(socket.connected)
 
-  const [playerName, setPlayerName] = useState('')
-  const [player1Name, setPlayer1Name] = useState('')
+  const [playerName, setPlayerName] = useState('')    // player owning this state
+  const [player1Name, setPlayer1Name] = useState('') // who is going first
   // eslint-disable-next-line
-  const [player2Name, setPlayer2Name] = useState('')
+  const [player2Name, setPlayer2Name] = useState('')  // who is going second
   const [isReferee, setIsReferee] = useState(false)
   const [startGame, setStartGame] = useState(false)
   const [turnCount, setTurnCount] = useState(0)
@@ -31,10 +31,12 @@ export default function Online () {
   const [history, setHistory] = useState([])
   const [player1Won, setPlayer1Won] = useState(false)
   const [player2Won, setPlayer2Won] = useState(false)
-  const [thisPlayerName, setThisPlayerName] = useState('')
+  const [thisPlayerName, setThisPlayerName] = useState('')  
   const [otherPlayerName, setOtherPlayerName] = useState('')
 
   const { user } = useAuthContext()
+  // most sticks:
+  const max = 50
 
   useEffect(() => {
     if (user) {
@@ -74,7 +76,6 @@ export default function Online () {
       if (socket.id === refereeId) {
         setIsReferee(true)
         setPlayer1Name(playerName) // referee is player1
-        const max = 50
         const random = Math.floor(Math.random() * max) + 5
         setBeginning(random)
         setPresentNumber(random)
@@ -160,7 +161,6 @@ export default function Online () {
     setPlayerRemove: player1Remove => setPlayer1Remove(player1Remove),
     setHistory: history => setHistory(history),
     setPlayerWon: player1Won => setPlayer1Won(player1Won),
-    
   }
 
   function handleNext () {  
@@ -177,7 +177,21 @@ export default function Online () {
       tempCount
     })
     setPresentNumber(beginning - arraySum(history))
-    console.log('in handleClick online', history, 'turn count', turnCount, 'tempCount', tempCount, isConnected, isReferee)
+    console.log('in handleClick online', history, 'turn count', turnCount, 'tempCount', tempCount, 'present num', presentNumber)
+  }
+
+  function handleNewGame () {
+    setOtherPlayerName('')
+    setPlayer2Name('')
+    setPlayer1Name('')
+    setHistory([])
+    setPlayer1Remove(0)
+    setPlayer2Remove(0)
+    setPlayer1Won(false)
+    setPlayer2Won(false)
+    socket.emit('ready')
+    setTurnCount(0)
+    setStartGame(false)
   }
 
   return (
@@ -212,6 +226,7 @@ export default function Online () {
           {otherPlayerName} won after choosing {player2Remove} sticks!
         </p>
       )}
+      {(player1Won || player2Won) && <button className='btn' onClick={handleNewGame}>New Game</button>}
       {startGame && <DisplaySticks howMany={presentNumber} />}
     </div>
   )
