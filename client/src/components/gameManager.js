@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
+import updateStatistics from '../shared/updateStatistics'
 
 // components and pages
 import DisplaySticks from './displaySticks'
@@ -57,6 +58,7 @@ export default function GameManager({gameType, name1, name2}) {
   }
 
   const player1ChoosesProps = {
+    gameType: gameType,
     previousNumber: player2Remove,
     name: player1Name,
     prevName: player2Name,
@@ -69,6 +71,7 @@ export default function GameManager({gameType, name1, name2}) {
   }
 
   const player2ChoosesProps = {
+    gameType: gameType,
     previousNumber: player1Remove,
     name: player2Name,
     prevName: player1Name,
@@ -83,6 +86,7 @@ export default function GameManager({gameType, name1, name2}) {
  
   function aiWins () {
     setPlayer2Won(true)
+    updateStatistics(user.id, 'aiLosses')
   }
 
 
@@ -103,6 +107,9 @@ export default function GameManager({gameType, name1, name2}) {
     setBeginning(tempRandom)
     setPlayer1Won(false)
     setPlayer2Won(false)
+    if (gameType === 'local') {
+      setPlayer2Name('')
+    }
   }
   
   function whichGame() {

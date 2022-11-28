@@ -7,10 +7,10 @@ const { updateStats, getStats } = require('../controllers/statController');
 
 
 // update users wins or losses
-statRouter.post('/updateStats/:id', updateStats)
+statRouter.post('/updateStats', updateStats)
 
 // get users stats
-statRouter.get('/getStats', getStats)
+statRouter.get('/getStats/:id', getStats)
 
 
 module.exports = statRouter;

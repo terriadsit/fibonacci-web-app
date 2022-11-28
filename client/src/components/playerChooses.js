@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 import arraySum from '../shared/arraySum'
+import updateStatistics from '../shared/updateStatistics'
 
 // styles
 import './playerChooses.css'
 
 export default function PlayerChooses ({ ...props }) {
+  const { user } = useAuthContext()
   const [tempRemove, setTempRemove] = useState(0)
   const [error, setError] = useState('')
 
+  const gameType = props.gameType
   const previousNumber = props.previousNumber
   const setPlayer1Turn = props.setPlayer1Turn
   const setPlayerRemove = props.setPlayerRemove
@@ -19,7 +23,6 @@ export default function PlayerChooses ({ ...props }) {
   const name = props.name
   const prevName = props.prevName
   
-
   const removedSoFar = arraySum(history)
 
   let largest = previousNumber === 0 ? beginning - 1 : previousNumber * 2
@@ -36,6 +39,27 @@ export default function PlayerChooses ({ ...props }) {
     )
     if (beginning - removedSoFar - removed === 0) {
       setPlayerWon(true)
+      // only player1 can be logged in and save stats
+      if (user){
+        switch (gameType) {
+          case 'AI':
+            updateStatistics(user.id, 'aiWins')
+            break;
+          case 'local':
+            if (history.length % 2 === 0) {
+              updateStatistics(user.id, 'localWins')
+            } else {
+              updateStatistics(user.id, 'localLosses')
+            }
+            break;
+          case 'online':
+            // manage updateStatistics in online.js
+           
+            break;
+          default:
+            console.log('must be online, ai or local game')
+        }
+      }
     }
   }
 

@@ -1,10 +1,9 @@
-import React from 'react'
+import io from 'socket.io-client'
+
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-import io from 'socket.io-client'
-
-//import GameManager from '../components/gameManager'
+import updateStatistics from '../shared/updateStatistics'
 import EnterName from '../components/enterName'
 import DisplaySticks from '../components/displaySticks'
 import PlayerChooses from '../components/playerChooses'
@@ -39,11 +38,11 @@ export default function Online () {
 
   useEffect(() => {
     if (user) {
-      
       setPlayerName(user.name)
     }
   },[user])
 
+  // socket listeners for connecting and disconnecting
   useEffect(() => {
     socket.on('connect', () => {
       console.log('connected to socket', socket.id)
@@ -61,12 +60,14 @@ export default function Online () {
     }
   }, [])
 
+  // socket emitters for knowing a player is ready to play
   useEffect(() => {
     if (playerName) {
       socket.emit('ready')
     }
   }, [playerName])
 
+  // socket listeners and emitters for game play 
   useEffect(() => {
     socket.on('startGame', refereeId => {
       console.log('Referee is', refereeId, 'playerName', playerName)
@@ -108,20 +109,10 @@ export default function Online () {
 
     socket.on('next turn', (turnData, prevSocketId) => {
       console.log('next turn', turnData, socket.id, prevSocketId)
-      
-        
-        console.log('in next turn if ')
         setTurnCount(turnData.tempCount)
         setPlayer2Remove(turnData.player1Remove)
         setPlayer2Won(turnData.player1Won)
         setHistory(prev => [...prev, turnData.player1Remove])
-      
-        
-        //setPlayer1Remove(turnData.player1Remove)
-        //setPlayer1Won(turnData.player1Won)
-        
-        
-      
     })
 
     return () => {
@@ -132,18 +123,34 @@ export default function Online () {
     }
   }, [playerName])
 
+  // manage shared state as player1 turn changes
   useEffect(() => {
     const totalRemoved = arraySum(history)
     console.log('player1Turn useEffect', beginning, history)
     setPresentNumber(beginning - totalRemoved)
   }, [player1Turn, beginning, history])
 
+  // TODO make a reducer?
   useEffect(() => {
     handleNext()
-    // eslint-disable-next-line
+    // eslint-disable-next-line 
   }, [player1Turn])
 
+  // on win, save statistics to DB
+  useEffect(() => {
+    // only signed in users save stats
+   if (user) {
+      if (player1Won){
+        updateStatistics(user.id, 'onlineWins')
+      }  
+      if (player2Won) {
+        updateStatistics(user.id, 'onlineLosses')
+      }
+    }
+  }, [player1Won, player2Won, user])
+
   const player1ChoosesProps = {
+    gameType: 'online',
     previousNumber: player2Remove,
     name: thisPlayerName,
     prevName: otherPlayerName,
@@ -155,6 +162,7 @@ export default function Online () {
     setPlayerWon: player1Won => setPlayer1Won(player1Won),
     
   }
+
   function handleNext () {  
     let tempCount = turnCount
     tempCount++
@@ -168,8 +176,6 @@ export default function Online () {
       player2Won,
       tempCount
     })
-
-    
     setPresentNumber(beginning - arraySum(history))
     console.log('in handleClick online', history, 'turn count', turnCount, 'tempCount', tempCount, isConnected, isReferee)
   }

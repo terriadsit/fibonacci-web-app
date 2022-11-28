@@ -12,7 +12,10 @@ export default function EnterName ({ setPlayerName, player }) {
   function handleSubmit (e) {
     e.preventDefault()
     setPlayerName(tempName)
-    dispatch({type: "LOGIN", payload: {id: '', name: tempName}})
+    // only logged in player 1 changes logged in name
+    if (player === 1) {
+      dispatch({type: "LOGIN", payload: {id: '', name: tempName}})
+    }
   }
 
   const text = player === '0' ? `Enter Player's name` : `Enter Player ${player}'s name`
