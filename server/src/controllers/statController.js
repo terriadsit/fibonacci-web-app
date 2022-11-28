@@ -1,12 +1,17 @@
 const mongoose = require('mongoose')
 const Statistic = require('../models/statModel')
 
-const getStats = (req, res) => {
+const getStats = async (req, res) => {
   const { id } = req.params
-  console.log('in getStats path')
-  return res.status(200).json({
-    message: 'in getStats path'
-  })
+  const googleId = id
+  console.log('in getStats', googleId)
+  const statistics = await Statistic.find({ googleId: googleId }) 
+
+  if (!statistics || statistics.length === 0) {
+      return res.status(404).json({error: 'No such user, sign in with Google Login'})
+  }
+
+  res.status(200).json(statistics)
 }
 
 const updateStats = async (req, res) => {
