@@ -27,20 +27,8 @@ io.on("connection", (socket) => {
     },
   }
     
-   socket.on('ready', clientActions.onReady)     //() => {
-     
-  //   socket.join(room);
-
-  //   console.log('player ready', socket.id, room)
-  //   readyPlayerCount++
-  //   console.log('playercount', readyPlayerCount)
-  //   if (readyPlayerCount % 2 === 0) {
-      
-  //     console.log('emit start game room', room, 'id',socket.id)
-  //     io.to(room).emit('startGame', socket.id) // 2nd player will be referee
-  //   }
-  // });
-
+  socket.on('ready', clientActions.onReady)     //() => {
+  
   socket.on('begin', (beginData) => {
     console.log('server begindata', beginData);
     socket.to(room).emit('begin', beginData);

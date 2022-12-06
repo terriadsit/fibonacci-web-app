@@ -13,8 +13,7 @@ import Directions from '../components/directions'
 const socket = io()
 
 export default function Online () {
-  const [isConnected, setIsConnected] = useState(socket.connected)
-
+ 
   const [playerName, setPlayerName] = useState('')    // player owning this state
   const [player1Name, setPlayer1Name] = useState('') // who is going first
   // eslint-disable-next-line
@@ -44,23 +43,6 @@ export default function Online () {
     }
   },[user])
 
-  // socket listeners for connecting and disconnecting
-  useEffect(() => {
-    socket.on('connect', () => {
-      console.log('connected to socket', socket.id)
-      setIsConnected(true)
-    })
-
-    socket.on('disconnect', () => {
-      console.log('disconnected from socket')
-      setIsConnected(false)
-    })
-
-    return () => {
-      socket.off('connect')
-      socket.off('disconnect')
-    }
-  }, [])
 
   // socket emitters for knowing a player is ready to play
   useEffect(() => {

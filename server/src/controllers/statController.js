@@ -19,7 +19,13 @@ const updateStats = async (req, res) => {
 
   // set key value object (wh/ doc field) to be increased
   const key = req.body.change
+  if (!key) {
+    return res.status(404).json({ error: 'Error updating statistics, no change made' })
+  }
   const googleId = req.body.googleId
+  if (!googleId) {
+    return res.status(404).json({ error: 'Error updating statistics, sign in with Google to save stats' })
+  }
   let obj = {}
   obj[key] = 1
 

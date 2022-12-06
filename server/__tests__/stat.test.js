@@ -25,12 +25,30 @@ describe('Test GET /stat/getStats/:id', () => {
             console.log(' in get response', response.body)
           });
     });
-    test('It should catch missing required properties', () => {
-
-    });
+    test('It should catch missing required properties', async () => {
+        const response = await request(api)
+        .get('/stat/getStats/fakeId')
+        .expect(404)
+        
+     });
+    
 })
 
 describe('Test POST /stat/updateStats', () => {
+    const data = {
+        googleId: "103819164206813002244",
+        change: "localWins"
+    };
+
+    const dataWOChange = {
+        googleId: "103819164206813002244",
+        change: ""
+    }
+
+    const dataWOGoogleId = {
+        googleId: "",
+        change: "localWins"
+    };
 
     beforeAll(async () => {
         await mongoConnect();
@@ -41,19 +59,40 @@ describe('Test POST /stat/updateStats', () => {
     });
 
     test('It should respond with 201 success', async () => {
-        const data = {
-           googleId: "103819164206813002244",
-           change: "localWins"
-          }
+       
         const response = await request(api)
           .post('/stat/updateStats')
           .send(data)
+          .expect(201)
+          .expect('Content-Type', /json/) 
           .then((response) => {
-            console.log('post response', response.body, 'data', data)
+            expect(response.body).toHaveProperty('googleId', data.googleId);
+            expect(response.body).toHaveProperty(data.change);
+            console.log('post response', response.body, 'data', data);
           })
-          //.expect(201);
+          
+         
     });
-    test('It should catch missing required properties', () => {
+
+    test('It should catch missing change', async () => {
         
-    })
+         const response = await request(api)
+           .post('/stat/updateStats')
+           .send(dataWOChange)
+           .expect(404)
+           .then((response) => {
+             console.log('post response', response.body, 'data', data)
+           })
+    });
+    
+    test('It should catch missing googleId', async () => {
+        
+         const response = await request(api)
+           .post('/stat/updateStats')
+           .send(dataWOGoogleId)
+           .expect(404)
+           .then((response) => {
+             console.log('post response', response.body, 'data', data)
+           })
+    });
 })

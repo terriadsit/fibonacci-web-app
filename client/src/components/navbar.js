@@ -16,6 +16,7 @@ export default function Navbar () {
           <img src={logo} alt='logo' />
           <h1>Fibonacci Nim</h1>
         </li>
+        
         {user ? <li> <a href="/auth/logout"> <button className='btn'>Google Logout</button> </a> </li> :
                 <li> <a href='/auth/google'> <button className='btn'>Google Login</button> </a> </li>
         }
