@@ -37,7 +37,7 @@ const updateStats = async (req, res) => {
     return res.status(404).json({ error: 'Error updating statistics' })
   }
 
-  res.status(200).json(statistics)
+  res.status(201).json(statistics)
 }
 
 module.exports = {

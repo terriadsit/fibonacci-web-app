@@ -11,7 +11,7 @@
     "client": "npm start --prefix client",
     "watch": "npm run server & npm run client",
     "deploy": "npm run build --prefix client && npm start --prefix server",
-    "test": "npx cypress run",
+    "test": "npx cypress run && npm test --prefix server",
     "cypress:open": "cypress open"
   },
   "repository": {

@@ -86,7 +86,9 @@ export default function GameManager({gameType, name1, name2}) {
  
   function aiWins () {
     setPlayer2Won(true)
-    updateStatistics(user.id, 'aiLosses')
+    if (user) {
+      updateStatistics(user.id, 'aiLosses')
+    }
   }
 
 
