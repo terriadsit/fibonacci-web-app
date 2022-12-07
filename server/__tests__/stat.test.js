@@ -7,7 +7,7 @@ const { mongoConnect,
 // supertest will call listen function on api
 
 const data = {
-  googleId: "103819164206813002244",
+  googleId: "107690329016216797536",
   change: "localWins"
 };
 
