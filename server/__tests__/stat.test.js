@@ -12,7 +12,7 @@ const data = {
 };
 
 const addStat = async () => {
-  await request(api)
+  const response = await request(api)
           .post('/stat/updateStats')
           .send(data)
           .expect(201)
@@ -30,7 +30,8 @@ describe('Test GET /stat/getStats/:id', () => {
     });
 
     test('It should respond with 200 success', async () => {
-        await addStat();
+        const input = await addStat();
+        console.log('input', input);
         const response = await request(api)
           .get('/stat/getStats/107690329016216797536')
           .expect('Content-Type', /json/) // headers have content-type containing json
