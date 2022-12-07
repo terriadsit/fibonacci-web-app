@@ -6,10 +6,23 @@ const { mongoConnect,
 
 // supertest will call listen function on api
 
+const data = {
+  googleId: "103819164206813002244",
+  change: "localWins"
+};
+
+const addStat = async () => {
+  await request(api)
+          .post('/stat/updateStats')
+          .send(data)
+          .expect(201)
+};
+
 describe('Test GET /stat/getStats/:id', () => {
 
     beforeAll(async () => {
         await mongoConnect();
+        await addStat();
     });
 
     afterAll(async () => {
@@ -35,10 +48,7 @@ describe('Test GET /stat/getStats/:id', () => {
 })
 
 describe('Test POST /stat/updateStats', () => {
-    const data = {
-        googleId: "103819164206813002244",
-        change: "localWins"
-    };
+   
 
     const dataWOChange = {
         googleId: "103819164206813002244",
