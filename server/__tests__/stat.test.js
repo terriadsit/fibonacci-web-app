@@ -22,7 +22,7 @@ describe('Test GET /stat/getStats/:id', () => {
 
     beforeAll(async () => {
         await mongoConnect();
-        await addStat();
+        
     });
 
     afterAll(async () => {
@@ -30,6 +30,7 @@ describe('Test GET /stat/getStats/:id', () => {
     });
 
     test('It should respond with 200 success', async () => {
+        await addStat();
         const response = await request(api)
           .get('/stat/getStats/107690329016216797536')
           .expect('Content-Type', /json/) // headers have content-type containing json
