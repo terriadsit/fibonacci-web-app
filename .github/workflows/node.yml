@@ -8,12 +8,11 @@ jobs:
   build: 
     env:
       CI: true
-      MONGO_URL: mongodb://localhost/test
+      MONGO_URI: mongodb://localhost/test
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       COOKIE_KEY_1: ${{ secrets.COOKIE_KEY_1 }}
       COOKIE_KEY_2: ${{ secrets.COOKIE_KEY_2 }}
-      MONGO_URI: ${{ secrets.MONGO_URI }}
     strategy: 
       matrix: 
         node-version: [14.x, 16.x, 18.x]
