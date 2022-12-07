@@ -13,6 +13,7 @@ jobs:
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       COOKIE_KEY_1: ${{ secrets.COOKIE_KEY_1 }}
       COOKIE_KEY_2: ${{ secrets.COOKIE_KEY_2 }}
+      MONGO_URI: ${{ secrets.MONGO_URI }}
     strategy: 
       matrix: 
         node-version: [14.x, 16.x, 18.x]
