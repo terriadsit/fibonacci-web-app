@@ -7,8 +7,8 @@ const io = require('socket.io'); // also change ENDPOINT in client/online.js to 
 const apiServer = require("./api");  // the express handler
 
 const options = {
-//  key: fs.readFileSync(path.join(__dirname,'key.pem')), // comment these lines out and sockets work in online
-//  cert: fs.readFileSync(path.join(__dirname,'cert.pem')), // comment these lines out and sockets work in online
+  // key: fs.readFileSync(path.join(__dirname,'key.pem')), // comment these lines out and sockets work in online
+  // cert: fs.readFileSync(path.join(__dirname,'cert.pem')), // comment these lines out and sockets work in online
 }
 
 const httpServer = http.createServer(options, apiServer);
