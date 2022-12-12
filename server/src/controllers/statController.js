@@ -1,10 +1,11 @@
+// only users logged into Google may retrieve or save stats
 const mongoose = require('mongoose')
 const Statistic = require('../models/statModel')
 
+// retrieve stats for client
 const getStats = async (req, res) => {
   const { id } = req.params
   const googleId = id
-  console.log('in getStats', googleId)
   const statistics = await Statistic.find({ googleId: googleId }) 
 
   if (!statistics || statistics.length === 0) {
@@ -15,9 +16,8 @@ const getStats = async (req, res) => {
 }
 
 const updateStats = async (req, res) => {
-  console.log('req.body', req.body)
-
-  // set key value object (wh/ doc field) to be increased
+  
+  // set key value object (wh/ doc field) to be increased, ex "onlineWins"
   const key = req.body.change
   if (!key) {
     return res.status(404).json({ error: 'Error updating statistics, no change made' })
@@ -29,10 +29,9 @@ const updateStats = async (req, res) => {
   let obj = {}
   obj[key] = 1
 
-  console.log('obj', obj)
   const statistics = await Statistic.findOneAndUpdate(
     { googleId: googleId },
-    { $inc: obj },
+    { $inc: obj },  // increase the change field by one
     {
       new: true,
       upsert: true

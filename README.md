@@ -17,18 +17,30 @@ Player statistics was a feature added to demonstrate my knowlege of MongoDB and 
 
 [Client update](client/src/shared/updateStatistics.js)
 
-[Server update Post](server/src/controllers/statController.js)
+[Server Update POST](server/src/controllers/statController.js)
 
 ![Statistics Screen Shot](client/src/assets/ScreenShot2.png)
 
 # CI/CD:
 A yml file and GitHub Action were added to demonstrate my knowlege of CI/CD. The GitHub Action also creates the opportunity to incorporate Jest and Cypress Tests.
 
+[yml File](.github/workflows/node.yml)
+
 # Jest:
-Initial server tests are running. More tests TODO.
+Initial server tests are running. More tests TODO. 
+
+[Jest Tests](server/__tests__/)
 
 # Cypress:
 Initial client component tests are running. More tests TODO.
+
+[Cypress Tests](/cypress/e2e)
+
+# ToDos:
+* Add more tests
+* Add myLogger
+* Remove and add comments
+* Fix known issues
 
 # Known Issues:
 Online room management when player exits midgame needs resolution.

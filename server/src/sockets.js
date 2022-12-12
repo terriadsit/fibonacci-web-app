@@ -15,7 +15,6 @@ io.on("connection", (socket) => {
 
       console.log('player ready', socket.id, room)
       readyPlayerCount++
-      console.log('playercount', readyPlayerCount)
       if (readyPlayerCount % 2 === 0) {
       
         console.log('emit start game room', room, 'id',socket.id)
@@ -30,19 +29,16 @@ io.on("connection", (socket) => {
   socket.on('ready', clientActions.onReady)     //() => {
   
   socket.on('begin', (beginData) => {
-    console.log('server begindata', beginData);
     socket.to(room).emit('begin', beginData);
   });
 
   socket.on('player2Name', player2Name => {
-    console.log('server player2name', player2Name);
     socket.to(room).emit('player2Name', player2Name);
   })
 
   socket.on('next turn', (turnData) => {
     socket.to(room).emit('next turn', turnData, socket.id);
-    console.log('in server next turn', turnData);
-  })
+ })
 
   
   socket.on('disconnect', reason => {
