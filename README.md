@@ -1,5 +1,8 @@
+
 # fibonacci-web-app:
 My self assigned final project after completing my NodeJs class to demonstrate learning how to create a backend including sockets, server, CI/CD, MongoDB, Docker and Google Auth.
+
+Players are able to play against the computer (A.I. Fibi), other players online or on a shared device.
 
 ![Home Page Screen Shot](client/src/assets/screenshot.png)
 
