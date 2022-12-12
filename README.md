@@ -10,7 +10,7 @@ A socket server and http server are running side by side.
 
 [Sockets Code](server/src/sockets.js)
 
-![Online Game Screen Shot](client/src/assets/ScreenShot1.PNG)
+![Online Game Screen Shot](client/src/assets/ScreenShot1.png)
 
 # MongoDB:
 Player statistics was a feature added to demonstrate my knowlege of MongoDB and GoogleAuth interaction. A player's statistics are saved by client POST fetches to the server at the end of a game.
@@ -19,7 +19,7 @@ Player statistics was a feature added to demonstrate my knowlege of MongoDB and 
 
 [Server update Post](server/src/controllers/statController.js)
 
-![Statistics Screen Shot](client/src/assets/ScreenShot2.PNG)
+![Statistics Screen Shot](client/src/assets/ScreenShot2.png)
 
 # CI/CD:
 A yml file and GitHub Action were added to demonstrate my knowlege of CI/CD. The GitHub Action also creates the opportunity to incorporate Jest and Cypress Tests.
