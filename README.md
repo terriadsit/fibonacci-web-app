@@ -37,11 +37,11 @@ Initial server tests are running. More tests TODO.
 # Cypress:
 Initial client component tests are running. More tests TODO.
 
+[Cypress Tests](/cypress/e2e)
+
 # Docker:
 Docker container is running well.
 [Dockerfile](Dockerfile)
-
-[Cypress Tests](/cypress/e2e)
 
 # ToDos:
 * Add more tests
