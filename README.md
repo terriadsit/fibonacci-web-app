@@ -1,6 +1,6 @@
 
 # fibonacci-web-app:
-My self assigned final project after completing my NodeJs class to demonstrate learning how to create a backend including sockets, server, CI/CD, MongoDB, Docker and Google Auth.
+My self assigned final project after completing my NodeJs class to demonstrate learning how to create a backend including: sockets, server, CI/CD, MongoDB, Express, NodeJS, Docker and Google Auth.
 
 Players are able to play against the computer (A.I. Fibi), other players online or on a shared device.
 
@@ -36,6 +36,10 @@ Initial server tests are running. More tests TODO.
 
 # Cypress:
 Initial client component tests are running. More tests TODO.
+
+# Docker:
+Docker container is running well.
+[Dockerfile](Dockerfile)
 
 [Cypress Tests](/cypress/e2e)
 
