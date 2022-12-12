@@ -39,6 +39,7 @@ Initial client component tests are running. More tests TODO.
 # ToDos:
 * Add more tests
 * Add myLogger
+* Remove console.logs or change to myLogger
 * Remove and add comments
 * Fix known issues
 
