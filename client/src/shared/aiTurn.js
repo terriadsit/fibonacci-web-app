@@ -15,6 +15,8 @@ function loadFibonacci (last) {
     return fibonacci
 }
 
+// choose number of sticks to remove by AI after considering the presentNumber of sticks and what did player1Remove
+// AI is player 2
 export default function aiTurn (presentNumber, player1Remove, setHistory, setPlayer2Remove, aiWins) {
  
     let previousNumber = 0
@@ -40,7 +42,7 @@ export default function aiTurn (presentNumber, player1Remove, setHistory, setPla
         }
       }
 
-      // only able to remove if following rules
+      // only able to remove if following rules of less than twice the number removed previously
       if (remove > 2 * previousNumber) {
         remove = 2 * previousNumber
       }
