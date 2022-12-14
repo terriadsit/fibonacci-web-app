@@ -11,7 +11,7 @@ The $inc in the server statistics update was interesting to me. I was pleased to
 [Dynamic $inc](server/src/controllers/statController.js)
 
 Also, my design of how the computer is trying to win on its turn is interesting. The way to win uses the Fibonacci sequence. The number of the remaining sticks needs to be considered as a sum of the largest Fibonacci numbers possible. Then the smallest of these Fibonacci numbers needs to be chosen to be removed if doing so doesn't violate the restrictions on the largest number of sticks able to be chosen.
-[AI Turn]()
+[AI Turn](client/src/shared/aiTurn.js)
 
 # Socket.IO: 
 Playing online was a feature added to demonstrate my knowlege of Socket.io.  The server and client communitcate over sockets. Rooms are set up by the socket server to allow 2 players to play. The client waits for another player. When both are ready, the client and server emit and receive game play data. 

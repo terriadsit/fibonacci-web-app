@@ -15,6 +15,7 @@ const getStats = async (req, res) => {
   res.status(200).json(statistics)
 }
 
+// update the user's statistics if they are logged into Google
 const updateStats = async (req, res) => {
   
   // set key value object (wh/ doc field) to be increased, ex "onlineWins"
