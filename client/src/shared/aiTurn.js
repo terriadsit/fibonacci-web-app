@@ -1,3 +1,5 @@
+// create an array of fibonacci numbers which contains no values larger than last
+
 function loadFibonacci (last) {
     let fibonacci = []
     let first = 1
@@ -18,22 +20,23 @@ export default function aiTurn (presentNumber, player1Remove, setHistory, setPla
     let previousNumber = 0
     let remove = 0 // ai temporary removes
   
-    previousNumber = player1Remove
+    previousNumber = player1Remove // AI is player2
 
     // can AI win this round?
     if (presentNumber <= 2 * previousNumber && previousNumber !== 0) {
         remove = presentNumber
         aiWins()
     } else {
-
+      
+      // build fibonacci array
       const fibonacci = loadFibonacci(presentNumber)
 
-      // choose how many to remove
+      // choose how many to remove, the smallest Fibonacci number of those Fib numbers wh/ can be added to the present number
       let total = 0
       for (let i = fibonacci.length - 1; i >= 1; i--) {
-        if (total + fibonacci[i] <= presentNumber) {
+        if (total + fibonacci[i] <= presentNumber) { // don't consider sum's greater than the present number
           total += fibonacci[i]
-          remove = fibonacci[i]
+          remove = fibonacci[i]  
         }
       }
 
