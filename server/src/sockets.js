@@ -40,6 +40,11 @@ io.on("connection", (socket) => {
     socket.to(room).emit('next turn', turnData, socket.id);
  })
 
+ socket.on('leave game', () => {
+    socket.to(room).emit('player left');
+    console.log('player left room');
+    socket.leave(room);
+ })
   
   socket.on('disconnect', reason => {
     console.log('Client', socket.id, ' disconnected: ', reason);

@@ -9,6 +9,7 @@ import DisplaySticks from '../components/displaySticks'
 import PlayerChooses from '../components/playerChooses'
 import arraySum from '../shared/arraySum'
 import Directions from '../components/directions'
+import usePrompt from '../hooks/usePrompt'
 
 const socket = io()
 
@@ -34,8 +35,25 @@ export default function Online () {
   const [otherPlayerName, setOtherPlayerName] = useState('')
 
   const { user } = useAuthContext()
+
   // most sticks:
   const max = 50
+
+  // don't leave midgame without letting socket know
+  const isBlocking = () => {
+    console.log('playerName',playerName)
+    return playerName;
+  };
+
+  usePrompt("Are you sure you want to leave this game?", isBlocking(), leaveGame);
+
+   // if this player exits, let socket know so other player is not left waiting
+   function leaveGame() {
+    console.log('in leave Game')
+    socket.emit('leave game')
+    
+  }
+
 
   useEffect(() => {
     if (user) {
@@ -48,6 +66,7 @@ export default function Online () {
   useEffect(() => {
     if (playerName) {
       socket.emit('ready')
+
     }
   }, [playerName])
 
@@ -98,11 +117,17 @@ export default function Online () {
         setHistory(prev => [...prev, turnData.player1Remove])
     })
 
+    socket.on('player left', () => {
+      console.log('player left, waiting for other player')
+      handleNewGame()
+    })
+
     return () => {
       socket.off('player2Name')
       socket.off('begin')
       socket.off('startGame')
       socket.off('next turn')
+      socket.off('player left')
     }
   }, [playerName])
 
@@ -132,6 +157,7 @@ export default function Online () {
     }
   }, [player1Won, player2Won, user])
 
+ 
   const player1ChoosesProps = {
     gameType: 'online',
     previousNumber: player2Remove,
@@ -162,7 +188,7 @@ export default function Online () {
     console.log('in handleClick online', history, 'turn count', turnCount, 'tempCount', tempCount, 'present num', presentNumber)
   }
 
-  function handleNewGame () {
+  function resetGame() {
     setOtherPlayerName('')
     setPlayer2Name('')
     setPlayer1Name('')
@@ -171,14 +197,19 @@ export default function Online () {
     setPlayer2Remove(0)
     setPlayer1Won(false)
     setPlayer2Won(false)
-    socket.emit('ready')
     setTurnCount(0)
     setStartGame(false)
   }
 
+  function handleNewGame () {
+    resetGame()
+    socket.emit('ready')
+    
+  }
+
   return (
     <div className="container">
-      {!playerName && <EnterName setPlayerName={setPlayerName} player={'0'} />}
+       {!playerName && <EnterName setPlayerName={setPlayerName} player={'0'} />}
       
       {playerName && <Directions />}
       {!startGame && <p>Waiting for another player to join...</p>}
