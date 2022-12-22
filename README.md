@@ -55,7 +55,6 @@ Docker container is running well.
 * Add myLogger
 * Remove console.logs or change to myLogger
 * Remove and add comments
-* Fix known issues
+Lljyf
 
-# Known Issues:
-Online room management when player exits midgame needs resolution.
+
