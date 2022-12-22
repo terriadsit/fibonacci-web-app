@@ -129,7 +129,7 @@ export default function Online () {
       socket.off('next turn')
       socket.off('player left')
     }
-  }, [playerName])
+  }, [playerName, handleNewGame])
 
   // manage shared state as player1 turn changes
   useEffect(() => {

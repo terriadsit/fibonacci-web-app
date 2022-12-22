@@ -54,7 +54,7 @@ Docker container is running well.
 * Add more tests
 * Add myLogger
 * Remove console.logs or change to myLogger
-* Remove and add comments
-Lljyf
+* Remove excess and add pertinent comments
+
 
 

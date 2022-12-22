@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import useBlocker from "./useBlocker";
 
 /**
@@ -20,7 +20,7 @@ import useBlocker from "./useBlocker";
             console.log("in else confirm message")
         };
       },
-      [message]
+      [message, leaveGame]
     );
   
     useBlocker(blocker, when);
