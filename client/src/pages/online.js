@@ -1,4 +1,6 @@
+// online play is managed through sockets. <Online /> manages all state and game play for online games
 import io from 'socket.io-client'
+import { useSnackbar } from 'notistack'
 
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
@@ -10,6 +12,7 @@ import PlayerChooses from '../components/playerChooses'
 import arraySum from '../shared/arraySum'
 import Directions from '../components/directions'
 import usePrompt from '../hooks/usePrompt'
+import Win from '../components/win'
 
 const socket = io()
 
@@ -35,24 +38,23 @@ export default function Online () {
   const [otherPlayerName, setOtherPlayerName] = useState('')
 
   const { user } = useAuthContext()
+  const { enqueueSnackbar } = useSnackbar();
 
   // most sticks:
   const max = 50
 
   // don't leave midgame without letting socket know
   const isBlocking = () => {
-    console.log('playerName',playerName)
     return playerName;
   };
 
   usePrompt("Are you sure you want to leave this game?", isBlocking(), leaveGame);
 
    // if this player exits, let socket know so other player is not left waiting
-   function leaveGame() {
-    console.log('in leave Game')
-    socket.emit('leave game')
+    function leaveGame() {
     
-  }
+    socket.emit('leave game') 
+   }
 
 
   useEffect(() => {
@@ -73,7 +75,6 @@ export default function Online () {
   // socket listeners and emitters for game play 
   useEffect(() => {
     socket.on('startGame', refereeId => {
-      console.log('Referee is', refereeId, 'playerName', playerName)
       if (socket.id === refereeId) {
         setIsReferee(true)
         setPlayer1Name(playerName) // referee is player1
@@ -94,7 +95,6 @@ export default function Online () {
     })
 
     socket.on('begin', beginData => {
-      console.log('client beginDAta', beginData)
       setBeginning(beginData.beginning)
       setPresentNumber(beginData.beginning)
       setThisPlayerName(playerName)
@@ -103,23 +103,25 @@ export default function Online () {
     })
 
     socket.on('player2Name', player2Name => {
-      console.log('client player2Name', player2Name)
       setThisPlayerName(playerName)
       setOtherPlayerName(player2Name.player2Name)
       setPlayer2Name(player2Name.player2Name)
     })
 
     socket.on('next turn', (turnData, prevSocketId) => {
-      console.log('next turn', turnData, socket.id, prevSocketId)
-        setTurnCount(turnData.tempCount)
-        setPlayer2Remove(turnData.player1Remove)
-        setPlayer2Won(turnData.player1Won)
-        setHistory(prev => [...prev, turnData.player1Remove])
+      setTurnCount(turnData.tempCount)
+      setPlayer2Remove(turnData.player1Remove)
+      setPlayer2Won(turnData.player1Won)
+      setHistory(prev => [...prev, turnData.player1Remove])
     })
 
+    // recieve 'player left' when other player leaves game
     socket.on('player left', () => {
-      console.log('player left, waiting for other player')
-      handleNewGame()
+       socket.emit('other player left') // this player must leave current room if other player left
+       enqueueSnackbar('The other player exited this game.', { 
+         variant: 'info',
+         });
+       handleNewGame()
     })
 
     return () => {
@@ -134,7 +136,6 @@ export default function Online () {
   // manage shared state as player1 turn changes
   useEffect(() => {
     const totalRemoved = arraySum(history)
-    console.log('player1Turn useEffect', beginning, history)
     setPresentNumber(beginning - totalRemoved)
   }, [player1Turn, beginning, history])
 
@@ -185,7 +186,6 @@ export default function Online () {
       tempCount
     })
     setPresentNumber(beginning - arraySum(history))
-    console.log('in handleClick online', history, 'turn count', turnCount, 'tempCount', tempCount, 'present num', presentNumber)
   }
 
   function resetGame() {
@@ -203,6 +203,7 @@ export default function Online () {
 
   function handleNewGame () {
     resetGame()
+    
     socket.emit('ready')
     
   }
@@ -228,15 +229,21 @@ export default function Online () {
         && !player2Won && !player1Won && 
         <p>Waiting for {otherPlayerName}...</p>
       }
-      
+     
       {player1Won && (
-        <p data-cy='player1-won'>
-          {thisPlayerName} won after choosing {player1Remove} sticks!
-        </p>
+        <>
+          <p data-cy='player1-won'>
+            {thisPlayerName} won after choosing {player1Remove} sticks!
+          </p>
+          <Win playerName={thisPlayerName} />
+          <DisplaySticks howMany={500} />
+        </>
       )}
       {player2Won && (
         <p data-cy='player2-won'>
           {otherPlayerName} won after choosing {player2Remove} sticks!
+          <Win playerName={otherPlayerName} />
+          <DisplaySticks howMany={500} />
         </p>
       )}
       {(player1Won || player2Won) && <button className='btn' onClick={handleNewGame}>New Game</button>}

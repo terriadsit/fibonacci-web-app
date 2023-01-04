@@ -1,8 +1,9 @@
 // only users logged into Google may save or retrieve stats, change is the type of game lost or won for ex. "onlineWin"
+import myLogger from "./myLogger"
+
 const updateStatistics = async (googleId, change) => {
 
     const object = { change, googleId }
-    console.log('object', object)
     const response = await fetch(`/stat/updateStats`, {
         method: 'post',
         headers: {
@@ -13,10 +14,10 @@ const updateStatistics = async (googleId, change) => {
     const json = await response.json()
 
     if (!response.ok) {
-        console.log('error')
+        myLogger('error')
     }
     if (response.ok) {
-        console.log('update added', json)
+        myLogger('update added', json)
     }
 }
 

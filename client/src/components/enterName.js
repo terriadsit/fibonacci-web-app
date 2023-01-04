@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+// player is string, 0 for online, 1 or 2 for other game options
 export default function EnterName ({ setPlayerName, player }) {
   const { dispatch } = useAuthContext()
   const [tempName, setTempName] = useState('')
@@ -12,8 +13,8 @@ export default function EnterName ({ setPlayerName, player }) {
   function handleSubmit (e) {
     e.preventDefault()
     setPlayerName(tempName)
-    // only logged in player 1 changes logged in name
-    if (player === 1) {
+   // only logged in player 1 or 0 for online player changes logged in name
+    if (player === '1' || player === '0') {
       dispatch({type: "LOGIN", payload: {id: '', name: tempName}})
     }
   }

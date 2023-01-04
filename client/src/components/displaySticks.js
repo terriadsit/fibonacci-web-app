@@ -1,6 +1,7 @@
-import React from 'react';
+
 
 import Stick from './stick';
+import myLogger from '../shared/myLogger';
 
 // styles
 import './displaySticks.css'
@@ -10,7 +11,7 @@ export default function DisplaySticks({howMany}) {
     const emptyArray = Array(howMany).fill(0);
 
     if (howMany < 0 || howMany > 1000) {
-        console.log('error, must be between 0 and 1000 sticks')
+        myLogger('error, must be between 0 and 1000 sticks')
         return (
             <div>
                 <p>

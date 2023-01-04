@@ -3,6 +3,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 import arraySum from '../shared/arraySum'
 import updateStatistics from '../shared/updateStatistics'
+import myLogger from '../shared/myLogger'
 
 // styles
 import './playerChooses.css'
@@ -31,12 +32,6 @@ export default function PlayerChooses ({ ...props }) {
   }
 
   function checkForWin (removed) {
-    console.log(
-      'check for win beginning',
-      beginning,
-      'history',
-      arraySum(history)
-    )
     if (beginning - removedSoFar - removed === 0) {
       setPlayerWon(true)
       // only player1 can be logged in and save stats
@@ -57,7 +52,7 @@ export default function PlayerChooses ({ ...props }) {
            
             break;
           default:
-            console.log('must be online, ai or local game')
+            myLogger('must be online, ai or local game')
         }
       }
     }
@@ -65,18 +60,13 @@ export default function PlayerChooses ({ ...props }) {
 
   let num = 0;
   function onChange (e) {
-   // console.log('onchange e', e.target)
-    //num = e.target.value === NaN ? 0 : e.target.value;
     num = e.target.value.replace(/[^0-9]/g, '');
-    //num = parseInt(e.target.value, 10);
-    console.log('in onChange', num)
     setError('')
     setTempRemove(num)
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log('tempRemove', tempRemove)
     if (tempRemove < 1 || tempRemove > largest) {
       setError(`Choose a number between 1 and ${largest}`)
     } else {

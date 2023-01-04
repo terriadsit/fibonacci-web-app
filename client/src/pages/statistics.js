@@ -1,5 +1,7 @@
+// users logged into google may view their statistics which are saved on MongoDB by users GoogleId
 import { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
+
 
 // styles
 import './statistics.css'
@@ -32,7 +34,6 @@ export default function Statistics () {
       const json = await response.json()
 
       if (response.ok) {
-        console.log('json in get stats', json)
         setStatistics(json[0])
       }
     }
@@ -40,7 +41,6 @@ export default function Statistics () {
     if (user) {
       fetchStatistics()
     }
-    console.log('get statistics here')
   }, [user])
 
   return (

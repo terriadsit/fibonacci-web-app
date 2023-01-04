@@ -19,8 +19,6 @@ passport.serializeUser((user, done) => {
 // read the session from the cookie
 //deserializing means loading that user data from that cookie into a value we can read
 passport.deserializeUser((obj, done) => {
-    console.log('deserialize', obj)
-    
     done(null, obj);
 })
 
@@ -42,7 +40,7 @@ const AUTH_OPTIONS = {
 }
 
 function verifyCallback(accessToken, refreshToken, profile, done) {
-    console.log('Google profile', profile) 
+   
     // TODO save user here into Database
     done(null, profile);
 }

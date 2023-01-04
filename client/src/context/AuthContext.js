@@ -1,5 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 
+import myLogger from "../shared/myLogger";
+
 export const AuthContext = createContext()
 
 export const authReducer = (state, action) => { //state is prev state before change
@@ -43,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
       }, [])
 
      
-    console.log('AuthContext state', state)
+    myLogger('AuthContext state', state)
 
     return (
         <AuthContext.Provider value={{...state, dispatch}}>

@@ -31,7 +31,6 @@ describe('Test GET /stat/getStats/:id', () => {
 
     test('It should respond with 200 success', async () => {
         const input = await addStat();
-        console.log('input', input);
         const response = await request(api)
           .get('/stat/getStats/107690329016216797536')
           .expect('Content-Type', /json/) // headers have content-type containing json

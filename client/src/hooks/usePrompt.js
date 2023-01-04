@@ -14,10 +14,8 @@ import useBlocker from "./useBlocker";
             // leave page
             tx.retry();
             leaveGame();
-            console.log("in confirm messate")
         } else {
             // stay on page
-            console.log("in else confirm message")
         };
       },
       [message, leaveGame]
