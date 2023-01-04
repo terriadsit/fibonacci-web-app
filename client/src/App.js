@@ -14,6 +14,7 @@ import Local from '../src/pages/local';
 import Online from '../src/pages/online';
 import Welcome from './components/welcome';
 import Statistics from './pages/statistics';
+import Privacy from './pages/privacy';
 
 function App() {
   
@@ -45,7 +46,10 @@ function App() {
                path="/statistics" 
                element={<Statistics />} 
              />
-             
+             <Route 
+               path="/privacy" 
+               element={<Privacy />} 
+             />
           </Routes>
           </div>
       </BrowserRouter>
